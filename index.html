@@ -2,16 +2,15 @@
 <html>
     <head>
         <title>COSC 310 Hospital IMS</title>
+        <link rel="stylesheet" href="style/style.css" />
+        <!-- Import React -->
         <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
         <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+        <!-- Babel for JSX -->
         <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     </head>
     <body>
-        <p>This is a test of React and Next.js</p>
         <div id="app"></div>
-        <script type="text/jsx">
-            const app = document.getElementById('app');
-            ReactDOM.render(<h1>This code came from React.</h1>, app);
-        </script>
+        <script type="text/jsx" src="src/App.jsx"></script>
     </body>
 </html>
