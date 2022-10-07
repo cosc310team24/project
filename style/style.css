@@ -2,6 +2,7 @@ html,
 body {
     margin: 0;
     padding: 0;
+    height: 100%;
 }
 
 ol,
@@ -11,6 +12,7 @@ ul {
 
 .content {
     font-family: sans-serif;
+    height: 100%;
 }
 
 .navHeader {
@@ -83,7 +85,7 @@ ul {
     background-color: lightgray;
     display: flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
 }
 
