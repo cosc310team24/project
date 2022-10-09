@@ -1,9 +1,0 @@
-{
-  "/_app": "pages/_app.js",
-  "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js",
-  "/order": "pages/order.js",
-  "/": "pages/index.js",
-  "/warehouse": "pages/warehouse.js",
-  "/shipments": "pages/shipments.js"
-}
