@@ -95,3 +95,10 @@ ul {
     margin: 0 1rem;
     font-size: 8pt;
 }
+
+.link-unstyled,
+.link-unstyled:link,
+.link-unstyled:hover {
+    color: inherit;
+    text-decoration: inherit;
+}

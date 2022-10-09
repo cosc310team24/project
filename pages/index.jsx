@@ -5,6 +5,7 @@
  */
 
 //import styles from "../style/style.css";
+import Link from "next/link";
 import Head from "next/head";
 import { TEST_ITEMS } from "/public/libs/test_order_items.js";
 import { useEffect } from "react";
@@ -34,21 +35,31 @@ const FOOTER_TEXT =
  * Navigation Links, Header
  */
 
-function Link({ link }) {
-    return <li className="navLink">{link}</li>;
+function NavLink({ link }) {
+    return (
+        <li className="navLink">
+            <Link href={"/" + link.toLowerCase()}>
+                <a className="link-unstyled">{link}</a>
+            </Link>
+        </li>
+    );
 }
 
 function NavLinks({ links }) {
     const linkList = links?.map((link) => {
-        return <Link key={link} link={link} />;
+        return <NavLink key={link} link={link} />;
     });
     return <ul className="navLinks">{linkList}</ul>;
 }
 
-function Header({ title }) {
+export function Header({ title }) {
     return (
         <header className="navHeader">
-            <h1>{title}</h1>
+            <Link href="/">
+                <a className="link-unstyled">
+                    <h1>{title}</h1>
+                </a>
+            </Link>
             <NavLinks links={LINKS} />
         </header>
     );
@@ -121,8 +132,20 @@ function Footer() {
  * Page content and app entry point
  */
 
-function Content({ children }) {
-    return <div className="content">{children}</div>;
+export function Content({ children }) {
+    return (
+        <div className="content">
+            <Head>
+                {/* <link rel="icon" href="/favicon.ico" /> */}
+                <link
+                    rel="icon"
+                    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏥</text></svg>"
+                />
+            </Head>
+            {children}
+            <Footer />
+        </div>
+    );
 }
 
 export default function App() {
@@ -131,16 +154,8 @@ export default function App() {
     });
     return (
         <Content>
-            <Head>
-                {/* <link rel="icon" href="/favicon.ico" /> */}
-                <link
-                    rel="icon"
-                    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏥</text></svg>"
-                />
-            </Head>
-            <Header title="🏥 Order" />
+            <Header title="🏥 Home" />
             <OrderPanel testOrderItems={TEST_ITEMS} />
-            <Footer />
         </Content>
     );
 }
