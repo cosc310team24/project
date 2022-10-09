@@ -27,7 +27,7 @@ export class OrderItem {
     }
 
     toString() {
-        return `${this.id}. ${this.name} - ${this.price}`;
+        return `${this.id}. ${this.name}\n${this.price}`;
     }
 }
 

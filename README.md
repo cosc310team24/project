@@ -8,10 +8,14 @@ Antonio Vasquez-Mackay, Connor Doman, Eric Launer, Leo Henon
 
 ### Installation
 
-You will need to install `yarn` and `node` to run this project. You can install `yarn` by following the instructions [here](https://yarnpkg.com/en/docs/install). You can install `node` by following the instructions [here](https://nodejs.org/en/download/).
+First, clone the repository:
 
-~~You will also need to install `http-server`. You can do this by running `yarn add http-server`. If you want to run the server from anywhere, you can install it globally by running `yarn global add http-server`.~~
+```bash
+$ git clone https://github.com/cosc310team24/project.git
+```
 
-### Running the project
+You will need to install `node` and `yarn` to run this project. You can install `node` by following the instructions [here](https://nodejs.org/en/download/). You can install `yarn` by following the instructions [here](https://yarnpkg.com/en/docs/install).
 
-Open a terminal in this project's folder and run `yarn dev`. This will start the server which automatically compiles and reloads the project in the browser. You can access the project at `localhost:3000`.
+### Running the application
+
+Open a terminal in the folder you cloned and run `$ yarn dev`. This will start the server which automatically compiles and reloads the project in the browser. You can access the project at `http://localhost:3000` or whatever IP it says.

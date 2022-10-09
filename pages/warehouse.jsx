@@ -6,11 +6,12 @@
 import { useEffect } from "react";
 import Content from "/components/Content.jsx";
 import Header from "/components/Header.jsx";
+import TextColumn from "/components/TextColumn.jsx";
 
 const Warehouse = () => {
     return (
         <Content title="Warehouse">
-            <p>This is the warehouse page.</p>
+            <TextColumn text="This is the warehouse page." />{" "}
         </Content>
     );
 };
