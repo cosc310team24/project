@@ -5,6 +5,9 @@
  */
 
 //import styles from "../style/style.css";
+import Head from "next/head";
+import { TEST_ITEMS } from "/public/libs/test_order_items.js";
+import { useEffect } from "react";
 
 const LINKS = ["Order", "Shipments", "Warehouse"];
 
@@ -31,36 +34,12 @@ const FOOTER_TEXT =
  * Navigation Links, Header
  */
 
-const testItems = () => {
-    let items = [];
-    for (let i = 0; i < 100; i++) {
-        items.push(new Item(i, `Item ${i}`, Math.floor(Math.random() * 100)));
-    }
-    return items;
-};
-
-export async function getStaticProps() {
-    let generatedItems = [];
-    for (let i = 0; i < 100; i++) {
-        generatedItems.push(
-            new Item(i, `Item ${i}`, Math.floor(Math.random() * 100))
-        );
-    }
-
-    return {
-        props: {
-            testNavLinks: JSON.parse(JSON.stringify(LINKS)),
-            testOrderItems: JSON.parse(JSON.stringify(generatedItems)),
-        },
-    };
-}
-
 function Link({ link }) {
     return <li className="navLink">{link}</li>;
 }
 
-function NavLinks({ testNavLinks }) {
-    const linkList = testNavLinks?.map((link) => {
+function NavLinks({ links }) {
+    const linkList = links?.map((link) => {
         return <Link key={link} link={link} />;
     });
     return <ul className="navLinks">{linkList}</ul>;
@@ -70,7 +49,7 @@ function Header({ title }) {
     return (
         <header className="navHeader">
             <h1>{title}</h1>
-            <NavLinks />
+            <NavLinks links={LINKS} />
         </header>
     );
 }
@@ -84,6 +63,16 @@ class Item {
         style: "currency",
         currency: "CAD",
     });
+
+    static generatedTestItems = (() => {
+        let items = [];
+        for (let i = 0; i < 100; i++) {
+            items.push(
+                new Item(i, `Item ${i}`, Math.floor(Math.random() * 100))
+            );
+        }
+        return items;
+    })();
 
     constructor(id, name, price) {
         this.id = id;
@@ -109,8 +98,9 @@ function OrderItem({ item }) {
 }
 
 function OrderPanel({ testOrderItems }) {
-    const items = testItems()?.map((item) => {
-        return <OrderItem key={item} item={item} />;
+    const items = testOrderItems?.map((item) => {
+        let i = new Item(item.id, item.name, item.price);
+        return <OrderItem key={item.id} item={item} />;
     });
     return <ul className="orderList">{items}</ul>;
 }
@@ -136,10 +126,20 @@ function Content({ children }) {
 }
 
 export default function App() {
+    useEffect(() => {
+        document.title = "Hospital Inventory Management System";
+    });
     return (
         <Content>
-            <Header title="Hospital IMS" />
-            <OrderPanel />
+            <Head>
+                {/* <link rel="icon" href="/favicon.ico" /> */}
+                <link
+                    rel="icon"
+                    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏥</text></svg>"
+                />
+            </Head>
+            <Header title="🏥 Order" />
+            <OrderPanel testOrderItems={TEST_ITEMS} />
             <Footer />
         </Content>
     );
