@@ -1,3 +1,8 @@
+/*
+ * Created on Sat Oct 08 2022
+ * Copyright (c) 2022 Connor Doman
+ */
+
 export const TEST_ITEMS = [
     {
         id: 0,

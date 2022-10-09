@@ -30,16 +30,6 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/order": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/order.js"
-    ],
-    "/shipments": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/shipments.js"
-    ],
     "/warehouse": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",

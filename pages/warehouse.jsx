@@ -4,15 +4,12 @@
  */
 
 import { useEffect } from "react";
-import { Content, Header } from "/pages/index.jsx";
+import Content from "/components/Content.jsx";
+import Header from "/components/Header.jsx";
 
 const Warehouse = () => {
-    useEffect(() => {
-        document.title = "Warehouse | Hospital Inventory Management System";
-    });
     return (
-        <Content>
-            <Header title="🏥 Warehouse" />
+        <Content title="Warehouse">
             <p>This is the warehouse page.</p>
         </Content>
     );

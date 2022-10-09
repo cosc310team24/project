@@ -4,15 +4,12 @@
  */
 
 import { useEffect } from "react";
-import { Content, Header } from "/pages/index.jsx";
+import Content from "/components/Content.jsx";
+import Header from "/components/Header.jsx";
 
 const Order = () => {
-    useEffect(() => {
-        document.title = "Order | Hospital Inventory Management System";
-    });
     return (
-        <Content>
-            <Header title="🏥 Order" />
+        <Content title="Order">
             <p>This is the order page.</p>
         </Content>
     );

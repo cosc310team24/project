@@ -4,15 +4,12 @@
  */
 
 import { useEffect } from "react";
-import { Content, Header } from "/pages/index.jsx";
+import Content from "/components/Content.jsx";
+import Header from "/components/Header.jsx";
 
 const Shipments = () => {
-    useEffect(() => {
-        document.title = "Shipments | Hospital Inventory Management System";
-    });
     return (
-        <Content>
-            <Header title="🏥 Shipments" />
+        <Content title="Shipments">
             <p>This is the shipments page.</p>
         </Content>
     );
