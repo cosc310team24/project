@@ -16,7 +16,7 @@ $ git clone https://github.com/cosc310team24/project.git
 
 You will need to install `node` and `yarn` to run this project. You can install `node` by following the instructions [here](https://nodejs.org/en/download/). You can install `yarn` by following the instructions [here](https://yarnpkg.com/en/docs/install).
 
-Before you can run the app you need to install Next.js. Open a terminal in the folder you cloned and run `$ yarn add next react react-dom`.
+Before you can run the app you need to install the project's dependencies. Open a terminal in the folder you cloned and run `$ yarn install`.
 
 ### Running the application
 
