@@ -31,6 +31,8 @@ ul {
     transition: transform 200ms ease-in-out;
     -webkit-appearance: none;
     -moz-appearance: none;
+    border-radius: 0.25em;
+    text-align: center;
 }
 
 .uibutton:hover,
@@ -50,6 +52,14 @@ ul {
 .uibutton:disabled {
     background-color: grey;
     outline: none;
+}
+
+.uibutton.decrement {
+    border-radius: 0.25rem 0 0 0.25rem;
+}
+
+.uibutton.increment {
+    border-radius: 0 0.25rem 0.25rem 0;
 }
 
 .content {
@@ -186,14 +196,6 @@ ul {
     align-self: center;
 }
 
-.uibutton.decrement {
-    border-radius: 0.25rem 0 0 0.25rem;
-}
-
-.uibutton.increment {
-    border-radius: 0 0.25rem 0.25rem 0;
-}
-
 .incrementor input[type="text"] {
     width: 2em;
     height: 1.8rem;
@@ -210,9 +212,10 @@ input[type="text"] {
 .cartBanner {
     display: flex;
     flex-direction: row;
-    align-items: space-between;
+    justify-content: space-between;
+    align-items: center;
     z-index: 0;
-    padding: 1rem;
+    padding: 2rem;
 }
 
 .cartBanner li {
@@ -225,7 +228,25 @@ input[type="text"] {
 .cartBanner ul {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 0;
+}
+
+.cartInfo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.deleteButton {
+    background-color: #ed0000;
+    margin: 0.5rem;
+}
+
+.deleteButton:hover,
+.deleteButton:focus {
+    background-color: #ba0000;
 }
 
 /* Mobile Styling */

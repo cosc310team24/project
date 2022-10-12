@@ -5,7 +5,7 @@
 
 import { useState, useEffect } from "react";
 
-export const CartBanner = ({ items }) => {
+export const CartBanner = ({ items, onClear }) => {
     const [cartSize, setCartSize] = useState(0);
 
     useEffect(() => {
@@ -21,7 +21,12 @@ export const CartBanner = ({ items }) => {
 
     return (
         <div className="cartBanner">
-            <h2>Cart ({cartSize})</h2>
+            <div className="cartInfo">
+                <button className="uibutton deleteButton" onClick={onClear}>
+                    {"\u0078"}
+                </button>
+                <h2>Cart ({cartSize})</h2>
+            </div>
             <ul>{itemStrings}</ul>
         </div>
     );

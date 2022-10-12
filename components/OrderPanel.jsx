@@ -27,7 +27,11 @@ export class OrderItem {
         this.id = id;
         this.name = name;
 
-        this.price = OrderItem.priceFormatter.format(price);
+        this.price = price;
+    }
+
+    get priceString() {
+        return OrderItem.priceFormatter.format(this.price);
     }
 
     toString() {
@@ -35,31 +39,23 @@ export class OrderItem {
     }
 }
 
-export const OrderListItem = ({ item, onChange }) => {
+export const OrderListItem = ({ item, quantity, onChange }) => {
     const [id, setId] = useState(item.id);
-    const [count, setCount] = useState(0);
-
-    const didMount = useRef(false);
-
-    useEffect(() => {
-        if (!didMount.current) {
-            didMount.current = true;
-            return;
-        }
-    });
+    const [count, setCount] = useState(quantity);
 
     const handleChange = (count) => {
-        console.log(`OrderListItem ${id}: ${count}`);
-        setCount(count);
+        // console.log(`OrderListItem ${id}: ${count}`);
+        //setCount(count);
+        console.log(item);
         onChange(item, count);
     };
 
     const increment = (qty) => {
-        handleChange(count + 1);
+        handleChange(qty + 1);
     };
 
-    const decrement = () => {
-        if (count > 0) handleChange(count - 1);
+    const decrement = (qty) => {
+        if (qty > 0) handleChange(qty - 1);
     };
 
     let it =
@@ -72,17 +68,17 @@ export const OrderListItem = ({ item, onChange }) => {
             <span>
                 {it.toString()}
                 <br />
-                {it.price}
+                {it.priceString}
             </span>
             <Incrementor
-                id={item.id}
-                value={count}
+                id={it.id}
+                value={quantity}
                 onChange={handleChange}
                 onIncrement={increment}
                 onDecrement={decrement}
             />
             <span className="itemTotal">
-                {OrderItem.priceFormatter.format(item.price * count)}
+                {OrderItem.priceFormatter.format(it.price * quantity)}
             </span>
         </li>
     );
@@ -91,7 +87,7 @@ export const OrderListItem = ({ item, onChange }) => {
 export const OrderPanel = ({ orderCallback, testOrderItems }) => {
     const [orderItems, setOrderItems] = useState({});
 
-    const addItem = (item, quantity) => {
+    const updateItems = (item, quantity) => {
         // Copy state object
         let newOrderItems = { ...orderItems };
         newOrderItems[item.id] = [item.name, quantity];
@@ -109,12 +105,24 @@ export const OrderPanel = ({ orderCallback, testOrderItems }) => {
 
     const items = testOrderItems?.map((item) => {
         let i = new OrderItem(item.id, item.name, item.price);
-        return <OrderListItem key={item.id} item={item} onChange={addItem} />;
+        const qty = orderItems[i.id] ? orderItems[i.id][1] : 0;
+        return (
+            <OrderListItem
+                key={i.id}
+                item={i}
+                onChange={updateItems}
+                quantity={qty}
+            />
+        );
     });
+
+    const handleClear = () => {
+        setOrderItems({});
+    };
 
     return (
         <div>
-            <CartBanner items={orderItems} />
+            <CartBanner items={orderItems} onClear={handleClear} />
             <ul className="orderList">{items}</ul>
         </div>
     );

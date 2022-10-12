@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 export const OrderForm = () => {
     const [cartSize, setCartSize] = useState(0);
 
-    console.log(cartSize);
+    // console.log(cartSize);
 
     return (
         <div className="orderForm">

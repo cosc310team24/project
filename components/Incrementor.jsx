@@ -30,7 +30,7 @@ export const Incrementor = ({
         const val = cleanVal === "" ? 0 : parseInt(cleanVal);
         setInputCount(val);
 
-        console.log(`Incrementor ${id}: ${name} = ${val}`);
+        // console.log(`Incrementor ${id}: ${name} = ${val}`);
 
         if (name == id) {
             onChange(val);
