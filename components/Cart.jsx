@@ -23,7 +23,7 @@ export const CartBanner = ({ items, onClear }) => {
         <div className="cartBanner">
             <div className="cartInfo">
                 <button className="uibutton deleteButton" onClick={onClear}>
-                    {"\u0078"}
+                    {"\u2715"}
                 </button>
                 <h2>Cart ({cartSize})</h2>
             </div>
