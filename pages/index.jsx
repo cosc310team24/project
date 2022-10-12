@@ -5,8 +5,7 @@
  */
 
 import Content from "/components/Content.jsx";
-import OrderPanel from "/components/OrderPanel.jsx";
-import { TEST_ITEMS } from "/public/libs/test_order_items.js";
+import TextColumn from "/components/TextColumn.jsx";
 
 /**
  * Page content and app entry point
@@ -15,7 +14,7 @@ import { TEST_ITEMS } from "/public/libs/test_order_items.js";
 export default function App() {
     return (
         <Content title="Home">
-            <OrderPanel testOrderItems={TEST_ITEMS} />
+            <TextColumn text="Welcome to this IMS." />
         </Content>
     );
 }

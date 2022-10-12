@@ -3,15 +3,14 @@
  * Copyright (c) 2022 Connor Doman
  */
 
-import { useEffect } from "react";
 import Content from "/components/Content.jsx";
-import Header from "/components/Header.jsx";
-import TextColumn from "/components/TextColumn.jsx";
+import OrderPanel from "/components/OrderPanel.jsx";
+import { TEST_ITEMS } from "/public/libs/test_order_items.js";
 
 const Order = () => {
     return (
         <Content title="Order">
-            <TextColumn text="This is the order page." />
+            <OrderPanel testOrderItems={TEST_ITEMS} />
         </Content>
     );
 };
