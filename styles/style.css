@@ -15,12 +15,17 @@ ul {
     list-style: none;
     padding: 0;
 }
+
+.content {
+    padding-bottom: 2rem;
+}
+
 .uibutton {
     display: inline-block;
     border: none;
     padding: 0rem 1rem;
     height: 2rem;
-    margin: 0;
+    margin: 0.5rem 0;
     text-decoration: none;
     background: #0069ed;
     color: #ffffff;
@@ -247,6 +252,17 @@ input[type="text"] {
 .deleteButton:hover,
 .deleteButton:focus {
     background-color: #ba0000;
+}
+
+.inputField {
+    padding: 0.5em;
+    border-radius: 0.25rem;
+    border: 0.05em solid #3d3c3a;
+    margin: 0.5rem;
+}
+
+.inputField:disabled {
+    background-color: #f2f2f2;
 }
 
 /* Mobile Styling */
