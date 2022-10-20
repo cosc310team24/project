@@ -4,6 +4,7 @@
  */
 
 import { useState, useEffect, useRef } from "react";
+import styles from "/styles/Incrementor.module.css";
 
 export const Incrementor = ({
     id,
@@ -64,10 +65,10 @@ export const Incrementor = ({
     };
 
     return (
-        <div className="incrementor">
+        <div className={styles.incrementor}>
             <button
                 name="decrement"
-                className="uibutton decrement"
+                className={"uibutton left-radius " + styles.incButton}
                 onClick={handleClick}
                 disabled={noDecrement}
             >
@@ -75,6 +76,7 @@ export const Incrementor = ({
             </button>
             <input
                 name={id}
+                className={styles.count}
                 type="text"
                 value={inputCount}
                 onChange={handleChange}
@@ -82,7 +84,7 @@ export const Incrementor = ({
             />
             <button
                 name="increment"
-                className="uibutton increment"
+                className={"uibutton right-radius " + styles.incButton}
                 onClick={handleClick}
             >
                 {"\u002b"}

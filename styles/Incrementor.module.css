@@ -1,0 +1,30 @@
+.incrementor {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 1em 0;
+    width: 50%;
+    align-self: center;
+}
+
+.incrementor span {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 0.5px 1em;
+    align-self: center;
+}
+
+.incButton {
+    width: 100%;
+}
+
+.count {
+    font-size: 10pt;
+    width: 2em;
+    height: 1.8rem;
+    text-align: center;
+    border: none;
+    border-top: 0.05rem solid black;
+    border-bottom: 0.05rem solid black;
+}

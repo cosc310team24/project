@@ -1,0 +1,197 @@
+/*
+ * Created on Tue Oct 9 2022
+ * Copyright (c) 2022 Connor Doman
+ */
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+ol,
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+input[type="text"] {
+    outline: none;
+}
+
+/*
+    Useful Global Styles
+*/
+
+.content {
+    padding-bottom: 2rem;
+    font-family: sans-serif;
+    height: 100%;
+}
+
+.navHeader {
+    background-color: #0a2626;
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-family: sans-serif;
+    top: 0;
+    position: sticky;
+    z-index: 10;
+    overflow-x: hidden;
+}
+
+.navLinks {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.navLink {
+    margin: 0.25em 1em;
+    padding-bottom: 0.25em;
+    color: white;
+    text-decoration: none;
+    border-bottom: 0.05em solid transparent;
+}
+
+.navLink:hover {
+    cursor: pointer;
+    border-bottom: 0.05em solid white;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 0.5rem 0;
+    display: flex;
+    border-top: 0.05em solid #3d3c3a;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(1rem);
+}
+
+.footer p {
+    color: #3d3c3a;
+    display: flex;
+    align-items: center;
+    margin: 0 1rem;
+    font-size: 8pt;
+}
+
+.link-unstyled,
+.link-unstyled:link,
+.link-unstyled:hover {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.textColumn {
+    padding: 0 1rem;
+}
+
+/*
+    Input Elements
+*/
+
+.uibutton {
+    display: inline-block;
+    border: none;
+    padding: 0.5em;
+    height: 2em;
+    margin: 0.5rem 0;
+    text-decoration: none;
+    background: #0069ed;
+    color: #ffffff;
+    font-family: sans-serif;
+    font-size: 12pt;
+    cursor: pointer;
+    text-align: center;
+    transition: transform 100ms ease-in-out;
+    border-radius: 0.25em;
+}
+
+.uibutton:hover,
+.uibutton:focus {
+    background: #0053ba;
+}
+
+.uibutton:active {
+    transform: scale(0.99);
+}
+
+.uibutton:disabled {
+    background-color: grey;
+    outline: none;
+}
+
+.left-radius {
+    border-radius: 0.25rem 0 0 0.25rem;
+}
+
+.right-radius {
+    border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.total-radius {
+    border-radius: 0.25rem;
+}
+
+.delete {
+    background-color: #ed0000;
+    margin: 0.5rem;
+}
+
+.uibutton.delete:hover,
+.uibutton.delete:focus {
+    background-color: #ba0000;
+}
+
+.uibutton.delete:active {
+    background-color: #aa0000;
+}
+
+.inputField {
+    padding: 0.5em;
+    border: 0.05em solid #3d3c3a;
+    width: 32em;
+    height: 2em;
+    margin: 0.5em 0;
+    font-size: 12pt;
+}
+
+.inputField:disabled {
+    background-color: #f2f2f2;
+}
+
+/*
+    Mobile Styling
+*/
+
+@media only screen and (max-width: 750px) {
+    .orderItem {
+        width: 33%;
+    }
+
+    .navHeader {
+        padding: 0 1rem;
+    }
+
+    .navLinks {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .navLink {
+        align-self: end;
+    }
+}

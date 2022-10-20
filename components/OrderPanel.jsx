@@ -6,6 +6,7 @@
 import { useState, useEffect, useRef } from "react";
 import Incrementor from "/components/Incrementor.jsx";
 import CartBanner from "/components/Cart.jsx";
+import styles from "/styles/OrderPanel.module.css";
 
 export class OrderItem {
     static priceFormatter = new Intl.NumberFormat("en-CA", {
@@ -43,6 +44,11 @@ export const OrderListItem = ({ item, quantity, onChange }) => {
     const [id, setId] = useState(item.id);
     const [count, setCount] = useState(quantity);
 
+    const it =
+        item instanceof OrderItem
+            ? item
+            : new OrderItem(item.id, item.name, item.price);
+
     const handleChange = (count) => {
         // console.log(`OrderListItem ${id}: ${count}`);
         //setCount(count);
@@ -58,13 +64,9 @@ export const OrderListItem = ({ item, quantity, onChange }) => {
         if (qty > 0) handleChange(qty - 1);
     };
 
-    let it =
-        item instanceof OrderItem
-            ? item
-            : new OrderItem(item.id, item.name, item.price);
     return (
-        <li className="orderItem">
-            <div className="itemImage"></div>
+        <li className={styles.orderItem}>
+            <div className={styles.itemImage}></div>
             <span>
                 {it.toString()}
                 <br />
@@ -77,7 +79,7 @@ export const OrderListItem = ({ item, quantity, onChange }) => {
                 onIncrement={increment}
                 onDecrement={decrement}
             />
-            <span className="itemTotal">
+            <span className={styles.itemTotal}>
                 {OrderItem.priceFormatter.format(it.price * quantity)}
             </span>
         </li>
@@ -88,13 +90,15 @@ export const OrderPanel = ({ orderCallback, testOrderItems }) => {
     const [orderItems, setOrderItems] = useState({});
 
     const updateItems = (item, quantity) => {
+        let oldLen = Object.keys(orderItems).length;
         // Copy state object
         let newOrderItems = { ...orderItems };
-        newOrderItems[item.id] = [item.name, quantity];
+        newOrderItems[item.id] = [item, quantity];
 
         // Remove item if quantity is 0
         if (quantity === 0) {
             delete newOrderItems[item.id];
+            console.log(`Successfully removed item with id: ${item.id}`);
         }
 
         // Set to new updated value
@@ -122,8 +126,12 @@ export const OrderPanel = ({ orderCallback, testOrderItems }) => {
 
     return (
         <div>
-            <CartBanner items={orderItems} onClear={handleClear} />
-            <ul className="orderList">{items}</ul>
+            <CartBanner
+                cart={orderItems}
+                onClear={handleClear}
+                onItemDelete={updateItems}
+            />
+            <ul className={styles.orderList}>{items}</ul>
         </div>
     );
 };
