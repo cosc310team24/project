@@ -13,9 +13,3 @@
     align-items: center;
     justify-content: center;
 }
-
-.formWidget input,
-.formWidget button {
-    width: 100%;
-    margin: 0.5em 0;
-}

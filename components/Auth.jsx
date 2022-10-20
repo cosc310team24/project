@@ -36,7 +36,7 @@ export const Auth = () => {
             </p>
             <div className={styles.formWidget}>
                 <input
-                    className="inputField"
+                    className="inputField total-radius"
                     type="email"
                     placeholder="Your email"
                     value={email}
