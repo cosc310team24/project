@@ -30,6 +30,10 @@ export class WareHouse {
     updateRemainingSpace(space) {
         //updates remaining space if required in the event of a discrepency or when setting up the system or expanding the warehouse
         this.remSpace = space;
+        if (this.remSpace<=0.2*this.totSpace) {
+            //checks if remaining storage space is low and notifies user
+            console.log("Remaining storage space running low");
+        }
     }
     setID(ID) {
         //sets ID of warehouse
@@ -60,7 +64,7 @@ export class WareHouse {
              * Instance variables all need to be accessed with this. in front of them (unfortunately)
              */
             console.log(
-                `${this.changes[fin][2]}, ${this.changes[fin][0]} ${this.changes[fin][1]}`
+                `${this.changes[fin][2]}, ${this.changes[fin][0]}, ${this.changes[fin][1]}`
             ); //prints change log to user
             fin = fin - 1; //updates index
         }
@@ -116,6 +120,10 @@ export class WareHouse {
 
         // this.changes.add(str); //adds log of change to list of changes
         this.changes.push(str); //adds log of change to list of changes
+        if (this.remSpace<=0.2*this.totSpace) {
+            //checks if remaining storage space is low and notifies user
+            console.log("Remaining storage space running low");
+        }
     }
 }
 

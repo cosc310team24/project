@@ -87,3 +87,5 @@ export class Cart {//this method tracks items and quantity of specific items in 
         this.itemList=[];
     }
 }
+
+export default Cart;
