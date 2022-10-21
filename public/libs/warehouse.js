@@ -5,6 +5,11 @@ class WareHouse {//this class tracks the amount of storage space currently in us
       this.wareHouseID = null;//ID of warehouse
       this.changes = new ArrayList();//tracks which users modified warehouse stock
     }
+    constructor(totSpace, remSpace, ID) {//contsructs new warehouse object
+        this.totSpace=totSpace;
+        this.remSpace=remSpace;
+        this.wareHouseID=ID;
+    }
     getTotSpace() {//returns total space
       return this.totSpace;
     }
