@@ -1,10 +1,10 @@
 .orderList {
-    display: flex;
+    display: block;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
     margin: 0;
-    padding: 0;
+    padding: 2%;
     width: 100%;
     overflow: hidden;
     margin-bottom: 2rem;
@@ -15,23 +15,13 @@
     flex-direction: column;
     width: 20%;
     height: auto;
-    text-align: center;
+    text-align: left;
     transition: all ease 0.2s;
     background: white;
     padding: 1rem 0;
 }
 
 .orderItem:hover {
-    cursor: pointer;
-    transform: scale(1.1);
     box-shadow: 0px 0rem 1rem -0.1rem rgba(0, 0, 0, 0.1);
     border-radius: 2%;
-}
-
-.itemImage {
-    width: 70%;
-    height: auto;
-    aspect-ratio: 1/1;
-    background-color: grey;
-    margin: 2rem auto;
 }

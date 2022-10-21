@@ -11,7 +11,12 @@ export const TEST_ITEMS = [
     },
     {
         shipment_id: 456,
-        contents: "Item 2, Item 3",
+        contents: new Array(2).fill("Item 2"),
         price: 5.99,
+    },
+    {
+        shipment_id: 999,
+        contents: "Item 2, Item 3",
+        price: 10.99,
     }
 ];

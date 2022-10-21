@@ -9,7 +9,7 @@ import CartBanner from "/components/Cart.jsx";
 import styles from "/styles/ShipmentPanel.module.css";
 
 export class OrderItem {
-    constructor(shipment_id, content, price) {
+    constructor(shipment_id, content = [], price) {
         this.shipment_id = shipment_id;
         this.content = content;
         this.price = price;
@@ -39,21 +39,25 @@ export class OrderItem {
     }
 }
 
-export const OrderListItem = ({ item, quantity, onChange }) => {
+export const OrderListItem = ({ item }) => {
     const [shipment_id, setshipment_id] = useState(item.shipment_id);
-    const [count, setCount] = useState(quantity);
+    //const [count, setCount] = useState(quantity);
 
     const it =
-        item instanceof OrderItem
-            ? item
-            : new OrderItem(item.shipment_id, item.content, item.price);
+        item instanceof OrderItem 
+        ? item 
+        : new OrderItem(item.shipment_id, item.content, item.price);
 
     return (
         <li className={styles.orderItem}>
             <span>
-                {it.toString()}
+                Order Number: {shipment_id} 
+                <br/>
+                Content: 
+                <br/>
+                {it.content.map((item) => (content))}
                 <br />
-                {it.priceString}
+                Total: {it.priceString}
             </span>
         </li>
     );
@@ -77,8 +81,6 @@ export const OrderPanel = ({ orderCallback, testOrderItems }) => {
             <OrderListItem
                 key={i.shipment_id}
                 item={i}
-                onChange={updateItems}
-                quantity={qty}
             />
         );
     });
