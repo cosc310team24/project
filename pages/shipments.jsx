@@ -10,7 +10,7 @@ import { TEST_ITEMS } from "/utils/test_shipments.js";
 const Shipments = () => {
     return (
         <Content title="Shipments">
-            <ShipmentPanel testOrderItems={TEST_ITEMS} />
+            <ShipmentPanel testShipments={TEST_ITEMS} />
         </Content>
     );
 };

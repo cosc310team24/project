@@ -4,11 +4,11 @@
  */
 
 import { useState, useEffect, useRef } from "react";
-import Incrementor from "/components/Incrementor.jsx";
-import CartBanner from "/components/Cart.jsx";
 import styles from "/styles/ShipmentPanel.module.css";
+import SearchBar from "./SearchBar";
 
-export class OrderItem {
+//Shipment class
+export class Shipment {
     constructor(shipment_id, content = [], price) {
         this.shipment_id = shipment_id;
         this.content = content;
@@ -20,18 +20,8 @@ export class OrderItem {
         currency: "CAD",
     });
 
-    static generatedTestItems = (() => {
-        let items = [];
-        for (let i = 0; i < 100; i++) {
-            items.push(
-                new OrderItem(i, `Item ${i}`, Math.floor(Math.random() * 100))
-            );
-        }
-        return items;
-    })();
-
     get priceString() {
-        return OrderItem.priceFormatter.format(this.price);
+        return Shipment.priceFormatter.format(this.price);
     }
 
     toString() {
@@ -39,23 +29,16 @@ export class OrderItem {
     }
 }
 
-export const OrderListItem = ({ item }) => {
-    const [shipment_id, setshipment_id] = useState(item.shipment_id);
-    //const [count, setCount] = useState(quantity);
-
-    const it =
-        item instanceof OrderItem 
-        ? item 
-        : new OrderItem(item.shipment_id, item.content, item.price);
-
+export const ShipmentList = ({ item }) => {
+    const it = new Shipment(item.shipment_id, item.content, item.price);
     return (
-        <li className={styles.orderItem}>
+        <li className={styles.shipment}>
             <span>
-                Order Number: {shipment_id} 
-                <br/>
-                Content: 
-                <br/>
-                {it.content.map((item) => (content))}
+                Order Number: {it.shipment_id}
+                <br />
+                Content:
+                <br />
+                {it.content.map((item) => (content.toString()))}
                 <br />
                 Total: {it.priceString}
             </span>
@@ -63,22 +46,11 @@ export const OrderListItem = ({ item }) => {
     );
 };
 
-export const OrderPanel = ({ orderCallback, testOrderItems }) => {
-    const [orderItems, setOrderItems] = useState({});
-
-    const updateItems = (item, quantity) => {
-        let oldLen = Object.keys(orderItems).length;
-        // Copy state object
-        let newOrderItems = { ...orderItems };
-        newOrderItems[item.shipment_id] = [item, quantity];
-
-    };
-
-    const items = testOrderItems?.map((item) => {
-        let i = new OrderItem(item.shipment_id, item.name, item.price);
-        const qty = orderItems[i.shipment_id] ? orderItems[i.shipment_id][1] : 0;
+export const ShipmentPanel = ({ testShipments }) => {
+    const items = testShipments?.map((item) => {
+        let i = new Shipment(item.shipment_id, item.content, item.price);
         return (
-            <OrderListItem
+            <ShipmentList
                 key={i.shipment_id}
                 item={i}
             />
@@ -87,9 +59,11 @@ export const OrderPanel = ({ orderCallback, testOrderItems }) => {
 
     return (
         <div>
+            <h1 style={{textIndent: 40}}>Active shipments: </h1>
+            {/* <SearchBar /> */}
             <ul className={styles.orderList}>{items}</ul>
         </div>
     );
 };
 
-export default OrderPanel;
+export default ShipmentPanel;

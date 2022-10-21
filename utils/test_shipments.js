@@ -19,4 +19,10 @@ export const TEST_ITEMS = [
         contents: "Item 2, Item 3",
         price: 10.99,
     }
+    ,
+    {
+        shipment_id: 999,
+        contents: "Item 2, Item 3",
+        price: 10.99,
+    }
 ];
