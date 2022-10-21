@@ -23,3 +23,5 @@ export class OrderItem {
         return `${this.id}. ${this.name}`;
     }
 }
+
+default export OrderItem;
