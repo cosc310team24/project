@@ -3,14 +3,11 @@
  * Copyright (c) 2022 Antonio Vazquez-Mackay
  */
 
-import { useState } from 'react';
-
 const SearchBar = ({ searchQuery, setSearchQuery }) => (
     <form action="/" method="get" style={{ textIndent: 40 }}>
         <label htmlFor="header-search">
         </label>
         <input
-            // value={searchQuery}
             onInput={e => setSearchQuery(e.target.value)}
             type="text"
             id="header-search"

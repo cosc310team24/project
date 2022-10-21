@@ -60,7 +60,7 @@ export const ShipmentPanel = ({ testShipments }) => {
     return (
         <div>
             <h1 style={{textIndent: 40}}>Active shipments: </h1>
-            {/* <SearchBar /> */}
+            {/* <SearchBar /> */} 
             <ul className={styles.orderList}>{items}</ul>
         </div>
     );
