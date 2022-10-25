@@ -1,0 +1,45 @@
+.cartBanner {
+    display: flex;
+    flex-direction: row;
+    z-index: 0;
+    padding: 2rem;
+    overflow-x: auto;
+}
+
+.cartListItem {
+    flex: 1;
+    display: flex;
+    margin: 0rem 0.5rem;
+    padding: 0.5rem;
+    align-items: center;
+    border: 1px solid darkgrey;
+}
+
+.cartListItem .deleteButton {
+    font-size: 8pt;
+    margin: 0;
+}
+
+.cartInfo .deleteButton {
+    font-size: 16pt;
+    width: 3em;
+}
+
+.itemInfo {
+    margin: 0 0 0 0.5em;
+    min-width: 5em;
+}
+
+.cartList {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    overflow-x: auto;
+}
+
+.cartInfo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    min-width: 16em;
+}

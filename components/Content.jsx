@@ -4,7 +4,7 @@
  */
 
 import { useEffect } from "react";
-import { APP_NAME, APP_PREFIX } from "/public/libs/app_data.js";
+import { APP_NAME, APP_PREFIX } from "/utils/app_data.js";
 import { isMobile } from "react-device-detect";
 import Head from "next/head";
 import Footer from "./Footer";
