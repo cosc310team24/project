@@ -2,7 +2,7 @@
 
 ## Members
 
-Antonio Vasquez-Mackay, Connor Doman, Eric Launer, Leo Henon
+Antonio Vazquez-Mackay, Connor Doman, Eric Launer, Leo Henon
 
 ## Usage
 

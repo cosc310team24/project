@@ -3,15 +3,14 @@
  * Copyright (c) 2022 Connor Doman
  */
 
-import { useEffect } from "react";
 import Content from "/components/Content.jsx";
-import Header from "/components/Header.jsx";
-import TextColumn from "/components/TextColumn.jsx";
+import ShipmentPanel from "/components/ShipmentPanel.jsx";
+import { TEST_ITEMS } from "/utils/test_shipments.js";
 
 const Shipments = () => {
     return (
         <Content title="Shipments">
-            <TextColumn text="This is the shipments page." />{" "}
+            <ShipmentPanel testShipments={TEST_ITEMS} />
         </Content>
     );
 };
