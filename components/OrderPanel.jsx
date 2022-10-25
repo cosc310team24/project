@@ -6,39 +6,8 @@
 import { useState, useEffect, useRef } from "react";
 import Incrementor from "/components/Incrementor.jsx";
 import CartBanner from "/components/Cart.jsx";
+import OrderItem from "/public/libs/order_item.js";
 import styles from "/styles/OrderPanel.module.css";
-
-export class OrderItem {
-    static priceFormatter = new Intl.NumberFormat("en-CA", {
-        style: "currency",
-        currency: "CAD",
-    });
-
-    static generatedTestItems = (() => {
-        let items = [];
-        for (let i = 0; i < 100; i++) {
-            items.push(
-                new OrderItem(i, `Item ${i}`, Math.floor(Math.random() * 100))
-            );
-        }
-        return items;
-    })();
-
-    constructor(id, name, price) {
-        this.id = id;
-        this.name = name;
-
-        this.price = price;
-    }
-
-    get priceString() {
-        return OrderItem.priceFormatter.format(this.price);
-    }
-
-    toString() {
-        return `${this.id}. ${this.name}`;
-    }
-}
 
 export const OrderListItem = ({ item, quantity, onChange }) => {
     const [id, setId] = useState(item.id);

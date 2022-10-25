@@ -3,7 +3,9 @@
  * Copyright (c) 2022 Connor Doman
  */
 
-import { useState, useEffect, useRef } from "react";
+
+import { useState, useEffect } from "react";
+import Cart from "/public/util/cart.js";
 import styles from "../styles/Cart.module.css";
 
 export const CartListItem = ({ item, itemQty, onDelete }) => {
