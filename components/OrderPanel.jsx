@@ -6,7 +6,7 @@
 import { useState, useEffect, useRef } from "react";
 import Incrementor from "/components/Incrementor.jsx";
 import CartBanner from "/components/Cart.jsx";
-import OrderItem from "/public/util/order_item.js";
+import OrderItem from "/public/libs/order_item.js";
 import styles from "/styles/OrderPanel.module.css";
 
 export const OrderListItem = ({ item, quantity, onChange }) => {
