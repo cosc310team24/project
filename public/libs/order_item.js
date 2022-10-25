@@ -24,4 +24,4 @@ export class OrderItem {
     }
 }
 
-default export OrderItem;
+export default OrderItem;

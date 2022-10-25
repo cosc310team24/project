@@ -4,6 +4,7 @@
  */
 
 import { useState, useEffect } from "react";
+import Cart from "/public/libs/cart.js";
 
 export const CartBanner = ({ items, onClear }) => {
     const [cartSize, setCartSize] = useState(0);
