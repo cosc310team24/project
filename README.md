@@ -6,6 +6,10 @@ Antonio Vazquez-Mackay, Connor Doman, Eric Launer, Leo Henon
 
 ## Usage
 
+## Description
+
+The purpose of this project is to create an inventory management system for a hospital capable of tracking stored items, ordering new items, storing user information such as permission level, forecasting shortages, and automatically ordering new items when stocks are low.
+
 ### Installation
 
 First, clone the repository:
