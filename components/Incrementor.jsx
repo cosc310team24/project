@@ -12,15 +12,24 @@ export const Incrementor = ({
     onChange,
     onIncrement,
     onDecrement,
+    max = Infinity,
+    min = 0,
+    disabled = false,
 }) => {
     // const [count, setCount] = useState(0);
     const [inputCount, setInputCount] = useState(value);
     const [noDecrement, setNoDecrement] = useState(true);
+    const [noIncrement, setNoIncrement] = useState(true);
     const countInput = useRef(null);
 
     useEffect(() => {
-        if (value <= 0) setNoDecrement(true);
-        else setNoDecrement(false);
+        if (value <= min) {
+            setNoDecrement(true);
+        } else setNoDecrement(false);
+
+        if (value >= max) {
+            setNoIncrement(true);
+        } else setNoIncrement(false);
 
         setInputCount(value);
     });
@@ -70,7 +79,7 @@ export const Incrementor = ({
                 name="decrement"
                 className={"uibutton left-radius " + styles.incButton}
                 onClick={handleClick}
-                disabled={noDecrement}
+                disabled={noDecrement || disabled}
             >
                 {"\u2013"}
             </button>
@@ -81,11 +90,13 @@ export const Incrementor = ({
                 value={inputCount}
                 onChange={handleChange}
                 ref={(input) => (countInput = input)}
+                disabled={disabled}
             />
             <button
                 name="increment"
                 className={"uibutton right-radius " + styles.incButton}
                 onClick={handleClick}
+                disabled={noIncrement || disabled}
             >
                 {"\u002b"}
             </button>

@@ -1,16 +1,15 @@
 .profileTable {
-    border-collapse: collapse;
+    border-spacing: 0;
     max-width: 50%;
     margin: 0 auto;
 }
 
 .profileTable th,
 .profileTable td {
-    border: 1px solid lightgrey;
+    border: 0.5px solid lightgrey;
     padding: 0.7em;
 }
-
-.headerRow {
+.headerRow th {
     background: #eee;
 }
 
@@ -19,7 +18,29 @@
     font-family: monospace;
 }
 
+.incrCell {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 .input {
     padding: 0.5em;
     border: 1px solid grey;
+}
+
+.profileTable tr:last-child td:first-child {
+    border-bottom-left-radius: 0.5rem;
+}
+
+.profileTable tr:last-child td:last-child {
+    border-bottom-right-radius: 0.5rem;
+}
+
+.profileTable .headerRow th:first-child {
+    border-top-left-radius: 0.5rem;
+}
+
+.profileTable .headerRow th:last-child {
+    border-top-right-radius: 0.5rem;
 }

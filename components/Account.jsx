@@ -4,10 +4,15 @@
  */
 
 import { useState, useEffect } from "react";
-import { supabase } from "../utils/supabaseClient.js";
+// import { supabase } from "../utils/supabaseClient.js";
 import styles from "../styles/Account.module.css";
+import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
+import withPageAuth from "@supabase/auth-helpers-nextjs";
 
 export const Account = ({ session }) => {
+    const supabase = useSupabaseClient();
+    const user = useUser();
+
     const [loading, setLoading] = useState(true);
     const [username, setUsername] = useState(null);
     const [firstName, setFirstName] = useState(null);
@@ -19,23 +24,9 @@ export const Account = ({ session }) => {
         getProfile();
     }, [session]);
 
-    const getCurrentUser = async () => {
-        const {
-            data: { session },
-            error,
-        } = await supabase.auth.getSession();
-
-        if (error) throw error;
-
-        if (!session?.user) throw new Error("Not logged in");
-
-        return session.user;
-    };
-
     const getProfile = async () => {
         try {
             setLoading(true);
-            const user = await getCurrentUser();
 
             let { data, error, status } = await supabase
                 .from("profiles")
@@ -50,8 +41,6 @@ export const Account = ({ session }) => {
                 console.log("No profile found");
             }
 
-            console.log(data);
-
             // React hooks
             if (data) {
                 setFirstName(data.firstName);
@@ -60,22 +49,27 @@ export const Account = ({ session }) => {
                 setPermission(data.permission);
             }
         } catch (error) {
-            alert(`Get profile: ${error.message}`);
+            alert(`Error in  getProfile: ${error.message}`);
         } finally {
             setLoading(false);
         }
     };
 
-    const updateProfile = async ({ firstName, lastName, email }) => {
+    const updateProfile = async ({
+        firstName,
+        lastName,
+        email,
+        permission,
+    }) => {
         try {
             setLoading(true);
-            const user = await getCurrentUser();
 
             const updates = {
                 id: user.id,
                 firstName,
                 lastName,
                 email: session.user.email,
+                permission: permission ? permission : user.permission,
             };
 
             let { error } = await supabase
@@ -148,6 +142,7 @@ export const Account = ({ session }) => {
                     type="number"
                     className="inputField total-radius"
                     value={parseInt(permission) || 0}
+                    onChange={(e) => setPermission(e.target.value)}
                     disabled
                 />
             </div>

@@ -6,15 +6,33 @@
 
 import Content from "/components/Content.jsx";
 import TextColumn from "/components/TextColumn.jsx";
+import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
+import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
+import Account from "/components/Account.jsx";
 
 /**
  * Page content and app entry point
  */
 
-export default function App() {
+export const App = () => {
+    const session = useSession();
+    const supabase = useSupabaseClient();
+
     return (
         <Content title="Home">
-            <TextColumn text="Welcome to this IMS." />
+            <TextColumn>
+                {!session ? (
+                    <Auth
+                        supabaseClient={supabase}
+                        appearance={{ theme: ThemeSupa }}
+                        theme="light"
+                    />
+                ) : (
+                    <Account key={session.user.id} session={session} />
+                )}
+            </TextColumn>
         </Content>
     );
-}
+};
+
+export default App;
