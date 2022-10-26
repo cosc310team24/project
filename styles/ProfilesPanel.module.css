@@ -1,0 +1,25 @@
+.profileTable {
+    border-collapse: collapse;
+    max-width: 50%;
+    margin: 0 auto;
+}
+
+.profileTable th,
+.profileTable td {
+    border: 1px solid lightgrey;
+    padding: 0.7em;
+}
+
+.headerRow {
+    background: #eee;
+}
+
+.idCell {
+    text-align: center;
+    font-family: monospace;
+}
+
+.input {
+    padding: 0.5em;
+    border: 1px solid grey;
+}

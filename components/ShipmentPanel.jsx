@@ -6,10 +6,12 @@
 import { useState, useEffect, useRef } from "react";
 import styles from "/styles/ShipmentPanel.module.css";
 import SearchBar from "./SearchBar";
+import Generator from "/utils/generators.js";
 
 //Shipment class
 export class Shipment {
     constructor(shipment_id, content = [], price) {
+        this.uniqueID = Generator.makeID(5);
         this.shipment_id = shipment_id;
         this.content = content;
         this.price = price;
@@ -24,23 +26,39 @@ export class Shipment {
         return Shipment.priceFormatter.format(this.price);
     }
 
+    get key() {
+        return `${this.uniqueID}_${this.shipment_id}`;
+    }
+
+    get contentString() {
+        return this.content.join(", ");
+    }
+
     toString() {
         return `${this.shipment_id}. ${this.content}`;
     }
 }
 
-export const ShipmentList = ({ item }) => {
-    const it = new Shipment(item.shipment_id, item.content, item.price);
+export const ShipmentListItem = ({ item }) => {
+    const [currentItem, setCurrentItem] = useState(item);
+
+    useEffect(() => {
+        if (!(item instanceof Shipment)) {
+            let it = new Shipment(item.shipment_id, item.content, item.price);
+            setCurrentItem(it);
+        }
+    }, [currentItem]);
+
     return (
         <li className={styles.shipment}>
             <span>
-                Order Number: {it.shipment_id}
+                Order Number: {item.shipment_id}
                 <br />
                 Content:
                 <br />
-                {it.content.map((item) => (content.toString()))}
+                {item.contentString}
                 <br />
-                Total: {it.priceString}
+                Total: {item.priceString}
             </span>
         </li>
     );
@@ -48,19 +66,14 @@ export const ShipmentList = ({ item }) => {
 
 export const ShipmentPanel = ({ testShipments }) => {
     const items = testShipments?.map((item) => {
-        let i = new Shipment(item.shipment_id, item.content, item.price);
-        return (
-            <ShipmentList
-                key={i.shipment_id}
-                item={i}
-            />
-        );
+        let i = new Shipment(item.shipment_id, item.contents, item.price);
+        return <ShipmentListItem key={i.key} item={i} />;
     });
 
     return (
         <div>
-            <h1 style={{textIndent: 40}}>Active shipments: </h1>
-            {/* <SearchBar /> */} 
+            <h1 style={{ margin: "1.5em" }}>Active shipments: </h1>
+            {/* <SearchBar /> */}
             <ul className={styles.orderList}>{items}</ul>
         </div>
     );
