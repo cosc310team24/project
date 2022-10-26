@@ -86,6 +86,40 @@ export class Cart {
             );
         }
     }
+    checkPrice(it) {
+         //checks price of all of a specified item in cart
+         len = this.itemList.length - 1;
+         for (let i = 0; i < len; i++) {
+             if (this.itemList[i][0] == it) {
+                 return this.itemList[i][1]*this.itemList[i][1].getPrice();
+             }
+             if (i == len - 1) {
+                 //if item is not found in cart returns 0
+                 return 0;
+             }
+         }
+    }
+    checkIndividualPrice(it) {
+        //checks price of a single specified item in cart
+        len = this.itemList.length - 1;
+        for (let i = 0; i < len; i++) {
+            if (this.itemList[i][0] == it) {
+                return this.itemList[i][1].getPrice();
+            }
+            if (i == len - 1) {
+                //if item is not found in cart returns 0
+                return 0;
+            }
+        }
+   }
+   checkTotPrice() {
+    //checks total price of all items in cart
+    len = this.itemList.length - 1;
+    price=0;
+    for (let i = 0; i < len; i++) {
+        price=price+this.itemList[i][1]*this.itemList[i][1].getPrice();
+    }   
+    }
     emptyCart() {
         //resets cart
         this.itemList = [];
