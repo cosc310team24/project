@@ -13,7 +13,7 @@ export const PageLink = ({ href, children }) => {
     };
 
     return (
-        <a className="pageLink" href={href} onClick={handleClick}>
+        <a className="pageLink link-unstyled" href={href} onClick={handleClick}>
             {children}
         </a>
     );
