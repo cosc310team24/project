@@ -35,3 +35,8 @@
     background-color: grey;
     margin: 2rem auto;
 }
+
+.addButton {
+    width: 50%;
+    align-self: center;
+}
