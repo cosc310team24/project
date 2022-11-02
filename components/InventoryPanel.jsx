@@ -1,5 +1,8 @@
 
+import ReactDOM from 'react-dom';
+
 import { useState, useEffect, useRef } from "react";
+import SearchTable from "/components/SearchTable.jsx";
 
 export class InventoryItem {
     static priceFormatter = new Intl.NumberFormat("en-CA", {
@@ -49,27 +52,10 @@ const testInventoryItems = [ {
     }
 ];
 
-    const InventoryPanel = () => {
-
-        const items = testInventoryItems?.map((item) => {
-            let i = new InventoryItem(item.id, item.name, item.price, item.quantity);
-            return (
-                <div
-                    key={i.id}
-                    item={i}
-                />
-            );
-        });
-
-    return (
-        <>
-        {testInventoryItems.map((item) => 
-        (
-            <h3>{item.name}  ${item.price}  amount: {item.quantity}</h3>
-            
-        ))}
-        </>
-    );
+const InventoryPanel = () => {
+        return (
+            <SearchTable data={testInventoryItems}/>
+        );
 };
 
 export default InventoryPanel;
