@@ -1,6 +1,6 @@
 import Incrementor from "/components/Incrementor.jsx";
 
-describe("Incrementor.cy.js", () => {
+describe("Incrementor.cy.jsx", () => {
     const counterSelector = '[data-cy="counter"]';
     const incrementSelector = '[name="increment"]';
     const decrementSelector = '[name="decrement"]';
