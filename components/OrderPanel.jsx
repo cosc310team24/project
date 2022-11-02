@@ -9,28 +9,26 @@ import CartBanner from "/components/Cart.jsx";
 import OrderItem from "/public/libs/order_item.js";
 import styles from "/styles/OrderPanel.module.css";
 
-export const OrderListItem = ({ item, quantity, onChange }) => {
+export const OrderListItem = ({ item, onChange, update = false }) => {
     const [id, setId] = useState(item.id);
-    const [count, setCount] = useState(quantity);
+    const [price, setPrice] = useState(0);
+    const [count, setCount] = useState(0);
 
     const it =
         item instanceof OrderItem
             ? item
             : new OrderItem(item.id, item.name, item.price);
 
-    const handleChange = (count) => {
+    const handleChange = (qty) => {
         // console.log(`OrderListItem ${id}: ${count}`);
-        //setCount(count);
+        setCount(qty);
+        setPrice(it.price * qty);
         console.log(item);
+        // onChange(item, qty);
+    };
+
+    const handleClick = () => {
         onChange(item, count);
-    };
-
-    const increment = (qty) => {
-        handleChange(qty + 1);
-    };
-
-    const decrement = (qty) => {
-        if (qty > 0) handleChange(qty - 1);
     };
 
     return (
@@ -41,62 +39,64 @@ export const OrderListItem = ({ item, quantity, onChange }) => {
                 <br />
                 {it.priceString}
             </span>
-            <Incrementor
-                id={it.id}
-                value={quantity}
-                onChange={handleChange}
-                onIncrement={increment}
-                onDecrement={decrement}
-            />
+            <Incrementor id={it.id} onChange={handleChange} min={0} />
             <span className={styles.itemTotal}>
-                {OrderItem.priceFormatter.format(it.price * quantity)}
+                {OrderItem.priceFormatter.format(price)}
             </span>
+            <button
+                className={`${styles.addButton} uibutton`}
+                onClick={handleClick}
+                disabled={count <= 0}
+            >
+                {update ? "Update" : "Add"}
+            </button>
         </li>
     );
 };
 
 export const OrderPanel = ({ orderCallback, testOrderItems }) => {
-    const [orderItems, setOrderItems] = useState({});
+    const [cartItems, setCartItems] = useState({});
+    const [orderableItems, setOrderableItems] = useState(testOrderItems);
 
     const updateItems = (item, quantity) => {
-        let oldLen = Object.keys(orderItems).length;
+        let oldLen = Object.keys(cartItems).length;
         // Copy state object
-        let newOrderItems = { ...orderItems };
-        newOrderItems[item.id] = [item, quantity];
+        let newCartItems = { ...cartItems };
+        newCartItems[item.id] = [item, quantity];
 
         // Remove item if quantity is 0
         if (quantity === 0) {
-            delete newOrderItems[item.id];
+            delete newCartItems[item.id];
             console.log(`Successfully removed item with id: ${item.id}`);
         }
 
         // Set to new updated value
-        setOrderItems(newOrderItems);
+        setCartItems(newCartItems);
 
         // console.log(orderItems);
     };
 
-    const items = testOrderItems?.map((item) => {
+    const items = orderableItems?.map((item) => {
         let i = new OrderItem(item.id, item.name, item.price);
-        const qty = orderItems[i.id] ? orderItems[i.id][1] : 0;
+        const qty = cartItems[i.id] ? cartItems[i.id][1] : 0;
         return (
             <OrderListItem
                 key={i.id}
                 item={i}
                 onChange={updateItems}
-                quantity={qty}
+                update={qty > 0}
             />
         );
     });
 
     const handleClear = () => {
-        setOrderItems({});
+        setCartItems({});
     };
 
     return (
         <div>
             <CartBanner
-                cart={orderItems}
+                cart={cartItems}
                 onClear={handleClear}
                 onItemDelete={updateItems}
             />
