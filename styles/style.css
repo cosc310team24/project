@@ -21,8 +21,8 @@ input[type="text"] {
 }
 
 /*
-    Useful Global Styles
-*/
+     Useful Global Styles
+ */
 
 .content {
     padding-bottom: 2rem;
@@ -54,7 +54,7 @@ input[type="text"] {
     text-align: right;
 }
 
-.pageLink {
+.navLink {
     margin: 0.25em 1em;
     padding-bottom: 0.25em;
     color: white;
@@ -62,7 +62,7 @@ input[type="text"] {
     border-bottom: 0.05em solid transparent;
 }
 
-.pageLink:hover {
+.navLink:hover {
     cursor: pointer;
     border-bottom: 0.05em solid white;
 }
@@ -101,8 +101,8 @@ input[type="text"] {
 }
 
 /*
-    Input Elements
-*/
+     Input Elements
+ */
 
 .uibutton {
     display: inline-block;
@@ -175,8 +175,8 @@ input[type="text"] {
 }
 
 /*
-    Mobile Styling
-*/
+     Mobile Styling
+ */
 
 @media only screen and (max-width: 750px) {
     .navHeader {

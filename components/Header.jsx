@@ -11,6 +11,7 @@ export const LINK_LIST = [
     "Order",
     "Shipments",
     "Warehouse",
+    "Profiles",
     "Testing",
     "Open Source",
 ];

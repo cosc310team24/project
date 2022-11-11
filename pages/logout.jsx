@@ -1,25 +1,31 @@
 /*
- * Created on Tue Oct 25 2022
+ * Created on Fri Nov 11 2022
  * Copyright (c) 2022 Connor Doman
  */
 import { useEffect } from "react";
 import { supabase } from "/utils/supabase.js";
+import { useRouter } from "next/router";
 import Content from "/components/Content.jsx";
 import TextColumn from "/components/TextColumn.jsx";
 
-export const Login = () => {
+export const Logout = () => {
+    const router = useRouter();
+
     useEffect(() => {
-        supabase.auth.signInWithOAuth({
-            provider: "github",
-        });
+        const logout = async () => {
+            supabase.auth.signOut();
+            router.push("/");
+        };
+        logout();
     }, []);
+
     return (
-        <Content title="Login">
+        <Content>
             <TextColumn>
-                <h1>Logging in...</h1>
+                <h1>Logging out...</h1>
             </TextColumn>
         </Content>
     );
 };
 
-export default Login;
+export default Logout;

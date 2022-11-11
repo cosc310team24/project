@@ -3,10 +3,10 @@
  * Copyright (c) 2022 Connor Doman
  */
 import { useState, useEffect, useRef } from "react";
-import styles from "/styles/ProfilesPanel.module.css";
+import Link from "next/link";
 import User from "/public/libs/user.js";
 import TextColumn from "/components/TextColumn";
-import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
+import styles from "/styles/ProfilesPanel.module.css";
 
 import Incrementor from "/components/Incrementor.jsx";
 
@@ -33,12 +33,10 @@ export const ProfileCellIncrementor = ({ val, onChange, disabled }) => {
     return (
         <td className={styles.incrCell}>
             <Incrementor
-                value={value}
                 onChange={handleChange}
-                onIncrement={increment}
-                onDecrement={decrement}
-                max="5"
-                disabled={disabled}
+                max={5}
+                min={0}
+                style={{ margin: 0 }}
             />
         </td>
     );
@@ -66,7 +64,7 @@ export const ProfileInputCell = ({ val, onChange }) => {
 };
 
 export const ProfileTableRow = ({ profile }) => {
-    const [uid, setUid] = useState(profile.uuid);
+    const [uid, setUid] = useState(profile.id);
     const [fname, setFirstName] = useState(profile.firstNname);
     const [lname, setLastName] = useState(profile.lastName);
     const [email, setEmail] = useState(profile.email);
@@ -74,7 +72,9 @@ export const ProfileTableRow = ({ profile }) => {
 
     return (
         <tr className={styles.profileRow}>
-            <td className={styles.idCell}>{uid}</td>
+            <td className={styles.idCell} title={uid}>
+                <Link href={"/" + uid}>{uid.slice(0, 5)}</Link>
+            </td>
             <ProfileInputCell
                 val={profile.firstName}
                 onChange={(v) => setFirstName(v)}
@@ -101,14 +101,14 @@ export const ProfileTable = ({ profiles }) => {
         let u = prof;
         if (!(prof instanceof User)) {
             u = new User(
-                prof.uniqueID,
+                prof.id,
                 prof.firstName,
                 prof.lastName,
                 prof.email,
                 prof.permission
             );
         }
-        return <ProfileTableRow key={u.uniqueID} profile={u} />;
+        return <ProfileTableRow key={u.id} profile={u} />;
     });
 
     return (
