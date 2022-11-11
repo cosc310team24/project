@@ -5,7 +5,6 @@
 import { useState, useEffect, useRef } from "react";
 import styles from "/styles/ProfilesPanel.module.css";
 import User from "/public/libs/user.js";
-import Authenticator from "/components/Authenticator";
 import TextColumn from "/components/TextColumn";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 
@@ -67,8 +66,7 @@ export const ProfileInputCell = ({ val, onChange }) => {
 };
 
 export const ProfileTableRow = ({ profile }) => {
-    const user = useUser();
-
+    const [uid, setUid] = useState(profile.uuid);
     const [fname, setFirstName] = useState(profile.firstNname);
     const [lname, setLastName] = useState(profile.lastName);
     const [email, setEmail] = useState(profile.email);
@@ -76,7 +74,7 @@ export const ProfileTableRow = ({ profile }) => {
 
     return (
         <tr className={styles.profileRow}>
-            <td className={styles.idCell}>{profile.id}</td>
+            <td className={styles.idCell}>{uid}</td>
             <ProfileInputCell
                 val={profile.firstName}
                 onChange={(v) => setFirstName(v)}
@@ -92,7 +90,7 @@ export const ProfileTableRow = ({ profile }) => {
             <ProfileCellIncrementor
                 val={profile.permission}
                 onChange={(v) => setPermission(v)}
-                disabled={user ? profile.email !== user.email : false}
+                disabled={false}
             />
         </tr>
     );

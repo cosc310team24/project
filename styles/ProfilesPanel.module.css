@@ -7,7 +7,7 @@
 .profileTable th,
 .profileTable td {
     border: 0.5px solid lightgrey;
-    padding: 0.7em;
+    padding: 0.5em 0.5em;
 }
 .headerRow th {
     background: #eee;
@@ -30,17 +30,17 @@
 }
 
 .profileTable tr:last-child td:first-child {
-    border-bottom-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.25em;
 }
 
 .profileTable tr:last-child td:last-child {
-    border-bottom-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.25em;
 }
 
 .profileTable .headerRow th:first-child {
-    border-top-left-radius: 0.5rem;
+    border-top-left-radius: 0.25em;
 }
 
 .profileTable .headerRow th:last-child {
-    border-top-right-radius: 0.5rem;
+    border-top-right-radius: 0.25em;
 }

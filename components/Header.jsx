@@ -6,13 +6,7 @@
 import Link from "next/link";
 import NavLinks from "./NavLinks";
 
-export const LINK_LIST = [
-    "Order",
-    "Shipments",
-    "Warehouse",
-    "User",
-    "Profiles",
-];
+export const LINK_LIST = ["Order", "Shipments", "Warehouse", "Profiles"];
 
 export const Header = ({ title }) => {
     return (
