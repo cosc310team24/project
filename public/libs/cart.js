@@ -10,7 +10,7 @@ export class Cart {
     }
     removeItem(it) {
         //removes an item from the cart
-        len = this.itemList.length - 1;
+        len = this.itemList.length;
         for (let i = 0; i < len; i++) {
             //loops through itemList until item is found
             if (this.itemList[i][0] == it) {
@@ -21,14 +21,14 @@ export class Cart {
     }
     addAmount(it, quant) {
         //adds specified amount of an item to the list
-        len = this.itemList.length - 1;
+        len = this.itemList.length;
         for (let i = 0; i < len; i++) {
             //loops through itemList until item is found
             if (this.itemList[i][0] == it) {
                 this.itemList[i][1] = this.itemList[i][1] + quant; //updates quantity
                 break;
             }
-            if (i == len - 1) {
+            if (i >= len - 1) {
                 //if end of list is reached adds item to list along with new quantity
                 this.itemList.push([it, quant]);
             }
@@ -36,7 +36,7 @@ export class Cart {
     }
     removeAmount(it, quant) {
         //removes specified amount of an item to the list
-        len = this.itemList.length - 1;
+        len = this.itemList.length;
         for (let i = 0; i < len; i++) {
             //loops through itemList until item is found
             if (this.itemList[i][0] == it) {
@@ -51,12 +51,12 @@ export class Cart {
     }
     checkAmount(it) {
         //checks amount of a specified item in cart
-        len = this.itemList.length - 1;
+        len = this.itemList.length;
         for (let i = 0; i < len; i++) {
             if (this.itemList[i][0] == it) {
                 return this.itemList[i][1];
             }
-            if (i == len - 1) {
+            if (i >= len - 1) {
                 //if item is not found in cart returns 0
                 return 0;
             }
@@ -64,10 +64,10 @@ export class Cart {
     }
     checkSumAmount() {
         //checks sum of item quantities in cart
-        len = this.itemList.length - 1;
+        len = this.itemList.length;
         cnt = 0;
         for (let i = 0; i < len; i++) {
-            cnt = cnt + itemList[i][1];
+            cnt = cnt + this.itemList[i][1];
         }
         return cnt;
     }
@@ -77,10 +77,10 @@ export class Cart {
     }
     seeCart() {
         //displays entire cart
-        len = this.itemList.length - 1;
+        len = this.itemList.length;
         for (let i = 0; i < len; i++) {
             console.log(
-                `${this.itemList[i][1]}, ${" "},  ${this.itemList[
+                `${this.itemList[i][1]}, ${this.itemList[
                     i
                 ][0].getName()}`
             );
@@ -88,12 +88,12 @@ export class Cart {
     }
     checkPrice(it) {
          //checks price of all of a specified item in cart
-         len = this.itemList.length - 1;
+         len = this.itemList.length;
          for (let i = 0; i < len; i++) {
              if (this.itemList[i][0] == it) {
-                 return this.itemList[i][1]*this.itemList[i][1].getPrice();
+                 return this.itemList[i][1]*this.itemList[i][0].getPrice();
              }
-             if (i == len - 1) {
+             if (i >= len - 1) {
                  //if item is not found in cart returns 0
                  return 0;
              }
@@ -101,12 +101,12 @@ export class Cart {
     }
     checkIndividualPrice(it) {
         //checks price of a single specified item in cart
-        len = this.itemList.length - 1;
+        len = this.itemList.length;
         for (let i = 0; i < len; i++) {
             if (this.itemList[i][0] == it) {
-                return this.itemList[i][1].getPrice();
+                return this.itemList[i][0].getPrice();
             }
-            if (i == len - 1) {
+            if (i >= len - 1) {
                 //if item is not found in cart returns 0
                 return 0;
             }
@@ -114,10 +114,10 @@ export class Cart {
    }
    checkTotPrice() {
     //checks total price of all items in cart
-    len = this.itemList.length - 1;
+    len = this.itemList.length;
     price=0;
     for (let i = 0; i < len; i++) {
-        price=price+this.itemList[i][1]*this.itemList[i][1].getPrice();
+        price=price+this.itemList[i][1]*this.itemList[i][0].getPrice();
     }   
     }
     emptyCart() {
