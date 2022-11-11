@@ -36,6 +36,7 @@
     flex-direction: row;
     margin: 0;
     overflow-x: auto;
+    padding: 1px 0;
 }
 
 /* .cartList:after {
@@ -67,24 +68,10 @@
     justify-content: center;
 }
 
-.cartButton {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    height: 2.75rem;
-    background-color: #00991f;
-}
-
-.cartButton:hover,
-.cartButton:focus {
-    background-color: #00801a;
-}
-
 .cartSymbolAmt {
     display: flex;
     flex-direction: column;
-    margin: 0 0.5em;
+    margin: 0 0 0 0.5em;
     align-self: center;
     justify-content: center;
 }

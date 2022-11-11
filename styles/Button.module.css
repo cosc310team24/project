@@ -4,7 +4,10 @@
  */
 
 .button {
-    display: inline-block;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     border: none;
     padding: 0.5em;
     height: 2em;
@@ -22,14 +25,23 @@
 
 .button:hover,
 .button:focus {
-    background: #0053ba;
+    filter: brightness(85%);
 }
 
 .button:active {
-    transform: scale(0.99);
+    transform: scale(0.995);
+    filter: brightness(75%);
 }
 
 .button:disabled {
     background-color: grey;
     outline: none;
+    cursor: default;
+}
+
+.button:disabled:hover,
+.button:disabled:focus,
+.button:disabled:active {
+    transform: none;
+    filter: brightness(100%);
 }

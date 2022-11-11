@@ -6,6 +6,7 @@
 import { useState, useEffect } from "react";
 import Cart from "/public/libs/cart.js";
 import { FaShoppingCart } from "react-icons/fa";
+import { Button, ButtonGo, ButtonDelete } from "/components/Button.jsx";
 import styles from "../styles/Cart.module.css";
 
 export const CartSymbol = ({ amt }) => {
@@ -21,16 +22,12 @@ export const CartSymbol = ({ amt }) => {
 
 export const CartButton = ({ amt, onClick = () => {} }) => {
     return (
-        <button
-            className={"uibutton " + styles.cartButton}
-            onClick={onClick}
-            disabled={amt === 0}
-        >
+        <ButtonGo onClick={onClick} disabled={amt === 0}>
             <FaShoppingCart className={styles.cartSymbolIcon} />
             <span className={styles.cartSymbolAmt} data-cy="cart-size">
                 ({amt})
             </span>
-        </button>
+        </ButtonGo>
     );
 };
 
@@ -45,13 +42,13 @@ export const CartListItem = ({ item, itemQty, onDelete }) => {
             data-cy="cart-list-item"
             className={styles.cartListItem + " total-radius"}
         >
-            <button
+            <ButtonDelete
                 data-cy="cart-list-item-delete"
-                className={"uibutton delete " + styles.deleteButton}
+                f="10pt"
+                w="1.5em"
+                h="1.5em"
                 onClick={handleDelete}
-            >
-                {"\u2715"}
-            </button>
+            />
             <span
                 className={styles.itemInfo}
             >{`${item.name} (${itemQty})`}</span>
@@ -121,13 +118,12 @@ export const CartBanner = ({
     return (
         <div data-cy="cart-banner" className={styles.cartBanner}>
             <div className={styles.cartInfo}>
-                <button
+                <ButtonDelete
+                    disabled={cartSize === 0}
                     data-cy="cart-clear"
-                    className={"uibutton delete " + styles.deleteButton}
                     onClick={localClearCart}
-                >
-                    {"\u2715"}
-                </button>
+                    w="4em"
+                />
                 <CartButton amt={cartSize} />
             </div>
             <ul className={styles.cartList}>{itemStrings}</ul>
