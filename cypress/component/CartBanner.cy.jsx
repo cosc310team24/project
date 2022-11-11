@@ -21,7 +21,7 @@ describe("CartBanner.cy.js", () => {
 
     it("counts items properly", () => {
         cy.mount(<CartBanner cart={testCart} />);
-        cy.get("[data-cy=cart-size]").should("have.text", 21);
+        cy.get("[data-cy=cart-size]").should("have.text", "(21)");
     });
 
     it("deletes a single item", () => {
@@ -45,12 +45,12 @@ describe("CartBanner.cy.js", () => {
             // console.log(orderItems);
         };
         cy.mount(<CartBanner cart={cart} onItemDelete={onDelete} />);
-        cy.get("[data-cy=cart-size]").should("have.text", 21);
+        cy.get("[data-cy=cart-size]").should("have.text", "(21)");
         cy.get("[data-cy=cart-list-item]")
             .first()
             .find("[data-cy=cart-list-item-delete]")
             .click();
         cy.get("[data-cy=cart-list-item]").should("have.length", 4);
-        cy.get("[data-cy=cart-size]").should("have.text", 20);
+        cy.get("[data-cy=cart-size]").should("have.text", "(20)");
     });
 });

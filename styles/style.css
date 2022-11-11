@@ -178,10 +178,6 @@ input[type="text"] {
 */
 
 @media only screen and (max-width: 750px) {
-    .orderItem {
-        width: 33%;
-    }
-
     .navHeader {
         padding: 0 1rem;
     }

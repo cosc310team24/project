@@ -104,7 +104,7 @@ export const OrderPanel = ({ orderCallback, testOrderItems }) => {
 
     return (
         <div data-cy="order-panel">
-            <p>{JSON.stringify(cartItems)}</p>
+            {/* <p>{JSON.stringify(cartItems)}</p> */}
             <CartBanner
                 cart={cartItems}
                 onClear={handleClear}

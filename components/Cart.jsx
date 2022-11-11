@@ -5,7 +5,34 @@
 
 import { useState, useEffect } from "react";
 import Cart from "/public/libs/cart.js";
+import { FaShoppingCart } from "react-icons/fa";
 import styles from "../styles/Cart.module.css";
+
+export const CartSymbol = ({ amt }) => {
+    return (
+        <div className={styles.cartSymbol}>
+            <FaShoppingCart className={styles.cartSymbolIcon} />
+            <span className={styles.cartSymbolAmt} data-cy="cart-size">
+                ({amt})
+            </span>
+        </div>
+    );
+};
+
+export const CartButton = ({ amt, onClick = () => {} }) => {
+    return (
+        <button
+            className={"uibutton " + styles.cartButton}
+            onClick={onClick}
+            disabled={amt === 0}
+        >
+            <FaShoppingCart className={styles.cartSymbolIcon} />
+            <span className={styles.cartSymbolAmt} data-cy="cart-size">
+                ({amt})
+            </span>
+        </button>
+    );
+};
 
 export const CartListItem = ({ item, itemQty, onDelete }) => {
     const handleDelete = () => {
@@ -54,15 +81,7 @@ export const CartBanner = ({
     }, [localCart]);
 
     const handleItemDelete = (item) => {
-        // callback to OrderPanel.updateItems(itemId, quantity);
-        /*if (onItemDelete) {
-            onItemDelete(item);
-        } else {
-            delete cart[item.id];
-        }*/
-
         localDeleteCartItem(item);
-
         if (onUpdate) onUpdate(localCart);
     };
 
@@ -105,13 +124,11 @@ export const CartBanner = ({
                 <button
                     data-cy="cart-clear"
                     className={"uibutton delete " + styles.deleteButton}
-                    onClick={onClear}
+                    onClick={localClearCart}
                 >
                     {"\u2715"}
                 </button>
-                <h2>
-                    Cart (<span data-cy="cart-size">{cartSize}</span>)
-                </h2>
+                <CartButton amt={cartSize} />
             </div>
             <ul className={styles.cartList}>{itemStrings}</ul>
         </div>

@@ -1,0 +1,35 @@
+/*
+ * Created on Thu Nov 10 2022
+ * Copyright (c) 2022 Connor Doman
+ */
+
+.button {
+    display: inline-block;
+    border: none;
+    padding: 0.5em;
+    height: 2em;
+    margin: 0.5rem 0;
+    text-decoration: none;
+    background: #0069ed;
+    color: #ffffff;
+    font-family: sans-serif;
+    font-size: 12pt;
+    cursor: pointer;
+    text-align: center;
+    transition: transform 100ms ease-in-out;
+    border-radius: 0.25em;
+}
+
+.button:hover,
+.button:focus {
+    background: #0053ba;
+}
+
+.button:active {
+    transform: scale(0.99);
+}
+
+.button:disabled {
+    background-color: grey;
+    outline: none;
+}
