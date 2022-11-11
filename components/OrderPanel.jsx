@@ -32,7 +32,7 @@ export const OrderListItem = ({ item, onChange, update = false }) => {
     };
 
     return (
-        <li className={styles.orderItem}>
+        <li data-cy="order-list-item" className={styles.orderItem}>
             <div className={styles.itemImage}></div>
             <span>
                 {it.toString()}
@@ -44,11 +44,12 @@ export const OrderListItem = ({ item, onChange, update = false }) => {
                 {OrderItem.priceFormatter.format(price)}
             </span>
             <button
+                name="add"
                 className={`${styles.addButton} uibutton`}
                 onClick={handleClick}
                 disabled={count <= 0}
             >
-                {update ? "Update" : "Add"}
+                {update && count > 0 ? "Update" : "Add"}
             </button>
         </li>
     );
@@ -76,6 +77,10 @@ export const OrderPanel = ({ orderCallback, testOrderItems }) => {
         // console.log(orderItems);
     };
 
+    const deleteOneItem = (item) => {
+        updateItems(item, 0);
+    };
+
     const items = orderableItems?.map((item) => {
         let i = new OrderItem(item.id, item.name, item.price);
         const qty = cartItems[i.id] ? cartItems[i.id][1] : 0;
@@ -94,11 +99,12 @@ export const OrderPanel = ({ orderCallback, testOrderItems }) => {
     };
 
     return (
-        <div>
+        <div data-cy="order-panel">
+            <p>{JSON.stringify(cartItems)}</p>
             <CartBanner
                 cart={cartItems}
                 onClear={handleClear}
-                onItemDelete={updateItems}
+                onItemDelete={deleteOneItem}
             />
             <ul className={styles.orderList}>{items}</ul>
         </div>

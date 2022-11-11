@@ -6,15 +6,19 @@
 
 import Content from "/components/Content.jsx";
 import TextColumn from "/components/TextColumn.jsx";
+import { useState, useEffect, useRef } from "react";
+import MarkdownRenderer from "/components/MarkdownRenderer.jsx";
 
 /**
  * Page content and app entry point
  */
 
 export default function App() {
+    useEffect(() => {}, []);
+
     return (
         <Content title="Home">
-            <TextColumn text="Welcome to this IMS." />
+            <MarkdownRenderer file="/content/homepage.md" />
         </Content>
     );
 }
