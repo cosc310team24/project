@@ -8,6 +8,61 @@ import Incrementor from "/components/Incrementor.jsx";
 import CartBanner from "/components/Cart.jsx";
 import OrderItem from "/public/libs/order_item.js";
 import styles from "/styles/OrderPanel.module.css";
+import { Button } from "/components/Button.jsx";
+import {
+    FaFirstAid,
+    FaHandHoldingMedical,
+    FaHandHoldingHeart,
+    FaHeartbeat,
+    FaHospital,
+    FaLaptopMedical,
+    FaLungs,
+    FaLungsVirus,
+    FaMedkit,
+    FaPills,
+    FaPlusCircle,
+    FaPrescriptionBottleAlt,
+    FaPrescriptionBottle,
+    FaPrescription,
+    FaPumpMedical,
+    FaRadiation,
+    FaShieldVirus,
+    FaSoap,
+} from "react-icons/fa";
+import { getRandomInt } from "/public/libs/random_with_seed.js";
+
+export const ITEM_IMAGES = [
+    <FaFirstAid />,
+    <FaHandHoldingMedical />,
+    <FaHandHoldingHeart />,
+    <FaHeartbeat />,
+    <FaHospital />,
+    <FaLaptopMedical />,
+    <FaLungs />,
+    <FaLungsVirus />,
+    <FaMedkit />,
+    <FaPills />,
+    <FaPlusCircle />,
+    <FaPrescriptionBottleAlt />,
+    <FaPrescriptionBottle />,
+    <FaPrescription />,
+    <FaPumpMedical />,
+    <FaRadiation />,
+    <FaShieldVirus />,
+    <FaSoap />,
+];
+
+export const RANDOM_ITEM_IMAGES = ((n) => {
+    let arr = [];
+    for (let i = 0; i < n; i++) {
+        arr.push(ITEM_IMAGES[getRandomInt(0, ITEM_IMAGES.length)]);
+    }
+    return arr;
+})(100);
+
+export const randomFromArray = (arr) => {
+    return arr[Math.floor(Math.random() * arr.length)];
+};
 
 export const OrderListItem = ({ item, onChange, update = false }) => {
     const [id, setId] = useState(item.id);
@@ -33,7 +88,7 @@ export const OrderListItem = ({ item, onChange, update = false }) => {
 
     return (
         <li data-cy="order-list-item" className={styles.orderItem}>
-            <div className={styles.itemImage}></div>
+            <div className={styles.itemImage}>{RANDOM_ITEM_IMAGES[id]}</div>
             <span>
                 {it.toString()}
                 <br />
@@ -43,14 +98,17 @@ export const OrderListItem = ({ item, onChange, update = false }) => {
             <span className={styles.itemTotal}>
                 {OrderItem.priceFormatter.format(price)}
             </span>
-            <button
+            <Button
                 name="add"
-                className={`${styles.addButton} uibutton`}
                 onClick={handleClick}
                 disabled={count <= 0}
+                style={{
+                    minWidth: "50%",
+                    alignSelf: "center",
+                }}
             >
                 {update && count > 0 ? "Update" : "Add"}
-            </button>
+            </Button>
         </li>
     );
 };

@@ -49,8 +49,9 @@ input[type="text"] {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
     flex-wrap: wrap;
+    text-align: right;
 }
 
 .navLink {
@@ -183,11 +184,16 @@ input[type="text"] {
     }
 
     .navLinks {
+        height: 100%;
         display: flex;
         flex-direction: column;
+        flex-wrap: nowrap;
+        overflow-y: auto;
+        align-self: center;
     }
 
     .navLink {
-        align-self: end;
+        align-self: flex-end;
+        font-size: 12pt;
     }
 }

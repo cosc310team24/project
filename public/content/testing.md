@@ -18,9 +18,9 @@ If your component fails the tests, Cypress will inform you where and how the fai
 
 In this project you will find 3 components that have been tested. They are:
 
--   `Incrementor` from `/components/Incrementor.jsx`
--   `OrderPanel` from `/componentes/OrderPanel.jsx`
--   `CartBanner` from `/components/Cart.jsx`
+1.  `Incrementor` from `/components/Incrementor.jsx`
+2.  `OrderPanel` from `/components/OrderPanel.jsx`
+3.  `CartBanner` from `/components/Cart.jsx`
 
 ## Testing
 

@@ -2,8 +2,8 @@ import Incrementor from "/components/Incrementor.jsx";
 
 describe("Incrementor.cy.jsx", () => {
     const counterSelector = '[data-cy="counter"]';
-    const incrementSelector = '[name="increment"]';
-    const decrementSelector = '[name="decrement"]';
+    const incrementSelector = '[name="buttonIncrement"]';
+    const decrementSelector = '[name="buttonDecrement"]';
 
     it("mounts", () => {
         cy.mount(<Incrementor />);

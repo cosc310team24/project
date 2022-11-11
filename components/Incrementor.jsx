@@ -4,6 +4,8 @@
  */
 
 import { useState, useEffect, useRef } from "react";
+import { Button, ButtonDecr, ButtonIncr } from "/components/Button.jsx";
+import { FaPlus, FaMinus } from "react-icons/fa";
 import styles from "/styles/Incrementor.module.css";
 
 export const Incrementor = ({
@@ -91,14 +93,7 @@ export const Incrementor = ({
 
     return (
         <div className={styles.incrementor}>
-            <button
-                name="decrement"
-                className={"uibutton left-radius " + styles.incButton}
-                onClick={handleClick}
-                disabled={noDecrement}
-            >
-                {"\u2013"}
-            </button>
+            <ButtonDecr decr={decrement} noDecr={noDecrement} m="0" />
             <input
                 name={id}
                 className={styles.count}
@@ -108,14 +103,7 @@ export const Incrementor = ({
                 ref={qtyInput}
                 data-cy="counter"
             />
-            <button
-                name="increment"
-                className={"uibutton right-radius " + styles.incButton}
-                onClick={handleClick}
-                disabled={noIncrement}
-            >
-                {"\u002b"}
-            </button>
+            <ButtonIncr incr={increment} noIncr={noIncrement} m="0" />
         </div>
     );
 };

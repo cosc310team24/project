@@ -6,7 +6,12 @@
 import { useState, useEffect } from "react";
 import Cart from "/public/libs/cart.js";
 import { FaShoppingCart } from "react-icons/fa";
-import { Button, ButtonGo, ButtonDelete } from "/components/Button.jsx";
+import {
+    Button,
+    ButtonGo,
+    ButtonDelete,
+    ButtonCart,
+} from "/components/Button.jsx";
 import styles from "../styles/Cart.module.css";
 
 export const CartSymbol = ({ amt }) => {
@@ -17,17 +22,6 @@ export const CartSymbol = ({ amt }) => {
                 ({amt})
             </span>
         </div>
-    );
-};
-
-export const CartButton = ({ amt, onClick = () => {} }) => {
-    return (
-        <ButtonGo onClick={onClick} disabled={amt === 0}>
-            <FaShoppingCart className={styles.cartSymbolIcon} />
-            <span className={styles.cartSymbolAmt} data-cy="cart-size">
-                ({amt})
-            </span>
-        </ButtonGo>
     );
 };
 
@@ -47,6 +41,7 @@ export const CartListItem = ({ item, itemQty, onDelete }) => {
                 f="10pt"
                 w="1.5em"
                 h="1.5em"
+                title="Delete this item from the cart"
                 onClick={handleDelete}
             />
             <span
@@ -117,16 +112,29 @@ export const CartBanner = ({
 
     return (
         <div data-cy="cart-banner" className={styles.cartBanner}>
-            <div className={styles.cartInfo}>
-                <ButtonDelete
-                    disabled={cartSize === 0}
-                    data-cy="cart-clear"
-                    onClick={localClearCart}
-                    w="4em"
-                />
-                <CartButton amt={cartSize} />
-            </div>
-            <ul className={styles.cartList}>{itemStrings}</ul>
+            <ul className={styles.cartList}>
+                <li
+                    className={styles.cartListItem}
+                    style={{ border: "1px solid transparent" }}
+                >
+                    {/* <div className={styles.cartInfo}> */}
+                    <ButtonDelete
+                        disabled={cartSize === 0}
+                        data-cy="cart-clear"
+                        onClick={localClearCart}
+                        w="4em"
+                        m="0"
+                        title="Clear cart"
+                    />
+                </li>
+                <li
+                    className={styles.cartListItem}
+                    style={{ border: "1px solid transparent" }}
+                >
+                    <ButtonCart amt={cartSize} m="0" />
+                </li>
+                {itemStrings}
+            </ul>
         </div>
     );
 };
