@@ -37,6 +37,12 @@
 }
 
 .addButton {
-    width: 50%;
+    min-width: 50%;
     align-self: center;
+}
+
+@media only screen and (max-width: 750px) {
+    .orderItem {
+        width: 33%;
+    }
 }
