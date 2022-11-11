@@ -7,7 +7,13 @@ import Link from "next/link";
 import NavLinks from "./NavLinks";
 import { FaRegHospital } from "react-icons/fa";
 
-export const LINK_LIST = ["Order", "Shipments", "Warehouse", "Users"];
+export const LINK_LIST = [
+    "Order",
+    "Shipments",
+    "Warehouse",
+    "Users",
+    "Testing",
+];
 
 export const Header = ({ title }) => {
     return (
