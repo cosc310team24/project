@@ -2,17 +2,12 @@ import OrderItem from "./order_item.js";
 
 export class WareHouse {
     //this class tracks the amount of storage space currently in use as well as maximum storage space in a warehouse
-
-    // javascript methods don't support overloading, so we use default values in the declaration
     constructor(totSpace = 0, remSpace = 0, ID = 0) {
         //contsructs new warehouse object
         this.totSpace = totSpace; //total storage volume in m^3
         this.remSpace = remSpace; //remaining storage volume in m^3
         this.wareHouseID = ID; //ID of warehouse
         this.changes = []; //tracks which users modified warehouse stock
-        /**
-         * ^ The basic Array in Javascript [] is a dynamic array just like an arraylist in Java.
-         */
     }
 
     getTotSpace() {
@@ -55,17 +50,7 @@ export class WareHouse {
         }
         for (let i = 0; i < n; i++) {
             //cycles through changes from most recent change back
-
-            /**
-             * instead of System.out.println(...), we use console.log(...)
-             *
-             * Javascript arrays can just be accessed directly with [...], no need for .get(...)
-             *
-             * Instance variables all need to be accessed with this. in front of them (unfortunately)
-             */
-            console.log(
-                `${this.changes[fin][2]}, ${this.changes[fin][0]}, ${this.changes[fin][1]}`
-            ); //prints change log to user
+            console.log(this.changes[fin]); //prints change log to user
             fin = fin - 1; //updates index
         }
     }
@@ -74,26 +59,12 @@ export class WareHouse {
         if (per.getPermission() >= it.getPermission()) {
             //checks if users permission status is sufficient
             this.remSpace = this.remSpace + it.getSpace() * n;
-
-            /**
-             * Javascript dates are a bit different than Java dates.
-             */
-
-            // let date = Calendar.getInstance().getTime();
-            // let dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
             let date = new Date();
             let dateFormat = date.toLocaleString("en-CA", {
                 timezone: "America/Vancouver",
             });
 
-            let str = [
-                per.getName(),
-                "removed " + n + " " + it.getName(),
-                /*dateFormat.format(date)*/
-                dateFormat,
-            ];
-
-            // this.changes.add(str); //adds log of change to list of changes
+            let str = per.getName() + " removed "+n+" " + it.getName() + " on " + dateFormat;
             this.changes.push(str); //adds log of change to list of changes
         } else {
             //if user's permission status is too low
@@ -103,22 +74,12 @@ export class WareHouse {
     add(it, n, per) {
         //removes storage space when n items are added
         this.remSpace = this.remSpace - it.getSpace() * n;
-
-        // let date = Calendar.getInstance().getTime();
-        // let dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
         let date = new Date();
         let dateFormat = date.toLocaleString("en-CA", {
             timezone: "America/Vancouver",
         });
 
-        let str = [
-            per.getName(),
-            "added " + n + " " + it.getName(),
-            /*dateFormat.format(date)*/
-            dateFormat,
-        ];
-
-        // this.changes.add(str); //adds log of change to list of changes
+        let str = per.getName() + " removed "+n+" " + it.getName() + " on " + dateFormat;
         this.changes.push(str); //adds log of change to list of changes
         if (this.remSpace<=0.2*this.totSpace) {
             //checks if remaining storage space is low and notifies user
