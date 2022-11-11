@@ -18,7 +18,7 @@
     text-align: center;
     transition: all ease 0.2s;
     background: white;
-    padding: 1rem 0;
+    padding: 1em 0;
 }
 
 .orderItem:hover {
@@ -33,5 +33,28 @@
     height: auto;
     aspect-ratio: 1/1;
     background-color: grey;
-    margin: 2rem auto;
+    margin: 0.25em auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48pt;
+    color: white;
+}
+
+.addButton {
+    min-width: 50%;
+    align-self: center;
+}
+
+@media only screen and (max-width: 750px) {
+    .orderItem {
+        width: 33%;
+        padding: 0;
+        padding-bottom: 0.5em;
+    }
+
+    .orderItem:hover {
+        transform: none;
+        box-shadow: none;
+    }
 }

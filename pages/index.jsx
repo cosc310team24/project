@@ -6,16 +6,19 @@
 
 import Content from "/components/Content.jsx";
 import TextColumn from "/components/TextColumn.jsx";
-import Account from "/components/Account.jsx";
+import { useState, useEffect, useRef } from "react";
+import MarkdownRenderer from "/components/MarkdownRenderer.jsx";
 
 /**
  * Page content and app entry point
  */
 
-export const App = () => {
+export default function App() {
+    useEffect(() => {}, []);
+
     return (
         <Content title="Home">
-            <TextColumn></TextColumn>
+            <MarkdownRenderer file="/content/homepage.md" />
         </Content>
     );
 };

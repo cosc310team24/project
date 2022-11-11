@@ -1,46 +1,30 @@
-# Hospital IMS Project
-
-## Members
-
-Antonio Vazquez-Mackay, Connor Doman, Eric Launer, Leo Henon
-
-## Usage
+# Testing Explained
 
 ## Description
 
-The purpose of this project is to create an inventory management system for a hospital capable of tracking stored items, ordering new items, storing user information such as permission level, forecasting shortages, and automatically ordering new items when stocks are low.
+Testing on this project was done using the `cypress` testing library. This is a library for web-based JavaScript UI frameworks. This library features end-to-end testing to simulate user stories, however this project will only be using the component testing feature.
 
-### Installation
+## How to Run a Component Test
 
-First, clone the repository:
+Once you've installed dependencies according to the readme in the root directory, you can run the component test by running the following command:
 
 ```bash
-$ git clone https://github.com/cosc310team24/project.git
+yarn cypress
 ```
 
-You will need to install `node` and `yarn` to run this project. You can install `node` by following the instructions [here](https://nodejs.org/en/download/). You can install `yarn` by following the instructions [here](https://yarnpkg.com/en/docs/install).
+This will open the Cypress test runner. Select `Component Testing`. Then select the browser you'd like to run the tests in. Choose the component you'd like to test and then your results will be displayed.
 
-Before you can run the app you need to install the project's dependencies. Open a terminal in the folder you cloned and run `$ yarn install`.
+If your component fails the tests, Cypress will inform you where and how the failure occurred. Edit your components appropriately.
 
-### Running the application
+In this project you will find 3 components that have been tested. They are:
 
-From a terminal in the folder you cloned, run `$ yarn dev`. This will start the server which automatically compiles and reloads the project in the browser. You can access the project at `http://localhost:3000` or whatever IP it says.
-
-### Class descriptions
-
-#### Warehouse
-
-This class defines a warehouse used for storage item and tracks the total storage space, remaining storage space, warehouse ID, and a changelog of the warehouse's items. It allows the addition and removal of items while keeping track of which staff member removed what items and notifies users if they attempt to remove an item above their permission level.
-
-#### cart
-
-This class keeps a list of items along with their quantities in the system's cart and allows the addition or removal of one or multiple items at a time.
+1.  `Incrementor` from `/components/Incrementor.jsx`
+2.  `OrderPanel` from `/components/OrderPanel.jsx`
+3.  `CartBanner` from `/components/Cart.jsx`
 
 ## Testing
 
 ### Description
-
-Testing is done using the Cypress testing framework. It can perform tests on the components themselves as well as by mimicking user stories and verifying the functionality of the application as a whole.
 
 Component tests are in `cypress/component`.
 

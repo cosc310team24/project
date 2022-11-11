@@ -1,0 +1,51 @@
+.markdownArea h1 {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.5em;
+}
+.markdownArea h2 {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.5em;
+}
+
+.markdownArea code {
+    display: inline-block;
+    padding: 0.1em 0.6em;
+    background-color: #333;
+    border-radius: 0.5em;
+    color: #f9f9f9;
+    line-height: 2em;
+    margin: 0.1em;
+}
+
+.markdownArea code::after {
+    content: "";
+}
+
+.markdownArea pre {
+    background-color: #333;
+    border-radius: 0.5em;
+    color: #f9f9f9;
+    overflow-x: scroll;
+}
+
+.markdownArea pre code {
+    margin: 1.5em 3em;
+    padding: 0;
+    background-color: transparent;
+    border-radius: 0;
+    color: #f9f9f9;
+}
+
+.markdownArea ol,
+.markdownArea ul {
+    list-style: decimal;
+    margin-left: 2em;
+}
+
+.markdownArea p {
+    line-height: 1.5em;
+}
+
+.markdownArea {
+    margin: 2.5%;
+}

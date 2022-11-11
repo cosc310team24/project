@@ -5,7 +5,25 @@
 
 import { useState, useEffect } from "react";
 import Cart from "/public/libs/cart.js";
+import { FaShoppingCart } from "react-icons/fa";
+import {
+    Button,
+    ButtonGo,
+    ButtonDelete,
+    ButtonCart,
+} from "/components/Button.jsx";
 import styles from "../styles/Cart.module.css";
+
+export const CartSymbol = ({ amt }) => {
+    return (
+        <div className={styles.cartSymbol}>
+            <FaShoppingCart className={styles.cartSymbolIcon} />
+            <span className={styles.cartSymbolAmt} data-cy="cart-size">
+                ({amt})
+            </span>
+        </div>
+    );
+};
 
 export const CartListItem = ({ item, itemQty, onDelete }) => {
     const handleDelete = () => {
@@ -14,13 +32,18 @@ export const CartListItem = ({ item, itemQty, onDelete }) => {
     };
 
     return (
-        <li className={styles.cartListItem + " total-radius"}>
-            <button
-                className={"uibutton delete " + styles.deleteButton}
+        <li
+            data-cy="cart-list-item"
+            className={styles.cartListItem + " total-radius"}
+        >
+            <ButtonDelete
+                data-cy="cart-list-item-delete"
+                f="10pt"
+                w="1.5em"
+                h="1.5em"
+                title="Delete this item from the cart"
                 onClick={handleDelete}
-            >
-                {"\u2715"}
-            </button>
+            />
             <span
                 className={styles.itemInfo}
             >{`${item.name} (${itemQty})`}</span>
@@ -28,22 +51,55 @@ export const CartListItem = ({ item, itemQty, onDelete }) => {
     );
 };
 
-export const CartBanner = ({ cart, onClear, onItemDelete }) => {
+export const CartBanner = ({
+    cart = {},
+    onClear = () => {},
+    onItemDelete = () => {},
+    onUpdate = (c) => {},
+}) => {
     const [cartSize, setCartSize] = useState(0);
+    const [localCart, setLocalCart] = useState(cart);
 
     useEffect(() => {
-        const size = Object.keys(cart).length;
-        const total = Object.values(cart).reduce((a, b) => a + b[1], 0);
-        if (cart) setCartSize(total);
-    });
+        // const size = Object.keys(cart).length;
+        if (cart !== localCart) setLocalCart(cart);
+    }, [cart]);
+
+    useEffect(() => {
+        //onUpdate(localCart);
+        if (onUpdate) onUpdate(localCart);
+        const size = Object.values(localCart).reduce((a, b) => a + b[1], 0);
+        setCartSize(size);
+    }, [localCart]);
 
     const handleItemDelete = (item) => {
-        // callback to OrderPanel.updateItems(itemId, quantity);
-        onItemDelete(item, 0);
+        localDeleteCartItem(item);
+        if (onUpdate) onUpdate(localCart);
     };
 
-    const itemStrings = Object.keys(cart).map((key) => {
-        const cartItem = cart[key];
+    const localDeleteCartItem = (item) => {
+        let oldLen = Object.keys(localCart).length;
+
+        // Copy state object
+        let newCartItems = { ...localCart };
+        // newCartItems[item.id] = [item, quantity];
+
+        // Remove item since quantity is 0
+        delete newCartItems[item.id];
+        console.log(`Locally removed item with id: ${item.id}`);
+
+        // Set to new updated value
+        setLocalCart(newCartItems);
+
+        // console.log(orderItems);
+    };
+
+    const localClearCart = () => {
+        setLocalCart({});
+    };
+
+    const itemStrings = Object.keys(localCart).map((key) => {
+        const cartItem = localCart[key];
         return (
             <CartListItem
                 key={key}
@@ -55,17 +111,30 @@ export const CartBanner = ({ cart, onClear, onItemDelete }) => {
     });
 
     return (
-        <div className={styles.cartBanner}>
-            <div className={styles.cartInfo}>
-                <button
-                    className={"uibutton delete " + styles.deleteButton}
-                    onClick={onClear}
+        <div data-cy="cart-banner" className={styles.cartBanner}>
+            <ul className={styles.cartList}>
+                <li
+                    className={styles.cartListItem}
+                    style={{ border: "1px solid transparent" }}
                 >
-                    {"\u2715"}
-                </button>
-                <h2>Cart ({cartSize})</h2>
-            </div>
-            <ul className={styles.cartList}>{itemStrings}</ul>
+                    {/* <div className={styles.cartInfo}> */}
+                    <ButtonDelete
+                        disabled={cartSize === 0}
+                        data-cy="cart-clear"
+                        onClick={localClearCart}
+                        w="4em"
+                        m="0"
+                        title="Clear cart"
+                    />
+                </li>
+                <li
+                    className={styles.cartListItem}
+                    style={{ border: "1px solid transparent" }}
+                >
+                    <ButtonCart amt={cartSize} m="0" />
+                </li>
+                {itemStrings}
+            </ul>
         </div>
     );
 };

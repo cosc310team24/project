@@ -4,47 +4,42 @@
  */
 
 import { useState, useEffect, useRef } from "react";
+import { Button, ButtonDecr, ButtonIncr } from "/components/Button.jsx";
+import { FaPlus, FaMinus } from "react-icons/fa";
 import styles from "/styles/Incrementor.module.css";
 
 export const Incrementor = ({
     id,
+    initialValue = 0,
     value,
-    onChange,
+    onChange = undefined,
     onIncrement,
     onDecrement,
     max = Infinity,
-    min = 0,
-    disabled = false,
+    min = -Infinity,
 }) => {
     // const [count, setCount] = useState(0);
-    const [inputCount, setInputCount] = useState(value);
-    const [noDecrement, setNoDecrement] = useState(true);
-    const [noIncrement, setNoIncrement] = useState(true);
-    const countInput = useRef(null);
+    const [inputCount, setInputCount] = useState(parseInt(initialValue));
+    const [noDecrement, setNoDecrement] = useState(false);
+    const [noIncrement, setNoIncrement] = useState(false);
+    const qtyInput = useRef(null);
 
     useEffect(() => {
-        if (value <= min) {
-            setNoDecrement(true);
-        } else setNoDecrement(false);
+        if (inputCount <= min) setNoDecrement(true);
+        else setNoDecrement(false);
 
-        if (value >= max) {
-            setNoIncrement(true);
-        } else setNoIncrement(false);
+        if (inputCount >= max) setNoIncrement(true);
+        else setNoIncrement(false);
 
-        setInputCount(value);
-    });
-
-    const handleChange = (e) => {
-        const name = e.target.name;
-        let cleanVal = e.target.value.replace(/\D/g, "");
-        const val = cleanVal === "" ? 0 : parseInt(cleanVal);
-        setInputCount(val);
-
-        // console.log(`Incrementor ${id}: ${name} = ${val}`);
-
-        if (name == id) {
-            onChange(val);
+        //if (value) setInputCount(value);
+        if (onChange) {
+            onChange(inputCount);
         }
+        updateCountFromInput(qtyInput.current);
+    }, [inputCount]);
+
+    const handleInputChange = (e) => {
+        updateCountFromInput(e.target);
     };
 
     const handleClick = (e) => {
@@ -59,47 +54,56 @@ export const Incrementor = ({
             console.error("Unknown button name");
         }
 
-        let event = new Event("change", { bubbles: true });
-        if (countInput.current) {
-            countInput.dispatchEvent(event);
-        }
+        // updateCountFromInput(qtyInput.current);
+    };
+
+    const updateCountFromInput = (elem) => {
+        const name = elem.name;
+        let cleanVal = elem.value.replace(/\D/g, "");
+        const val = cleanVal === "" ? 0 : parseInt(cleanVal);
+        setInputCount(val);
+
+        console.warn("handleChange... -> " + val);
+
+        // // console.log(`Incrementor ${id}: ${name} = ${val}`);
+        // if (!onChange) {
+        //     console.log("No onChange handler");
+        //     return;
+        // }
+
+        // if (name == id) {
+        //     console.log(`Incrementor: onChange(${val})...`);
+        //     onChange(val);
+        // }
     };
 
     const increment = () => {
-        if (onIncrement) onIncrement(value);
+        console.log("Increment");
+        if (noIncrement) return;
+
+        setInputCount(inputCount + 1);
     };
 
     const decrement = () => {
-        if (onDecrement) onDecrement(value);
+        console.log("Decrement");
+
+        if (noDecrement) return;
+        setInputCount(inputCount - 1);
     };
 
     return (
         <div className={styles.incrementor}>
-            <button
-                name="decrement"
-                className={"uibutton left-radius " + styles.incButton}
-                onClick={handleClick}
-                disabled={noDecrement || disabled}
-            >
-                {"\u2013"}
-            </button>
+            <ButtonDecr decr={decrement} noDecr={noDecrement} m="0" />
             <input
                 name={id}
                 className={styles.count}
                 type="text"
-                value={inputCount}
-                onChange={handleChange}
-                ref={(input) => (countInput = input)}
-                disabled={disabled}
+                value={value ? value : inputCount}
+                onChange={handleInputChange}
+                ref={qtyInput}
+                data-cy="counter"
             />
-            <button
-                name="increment"
-                className={"uibutton right-radius " + styles.incButton}
-                onClick={handleClick}
-                disabled={noIncrement || disabled}
-            >
-                {"\u002b"}
-            </button>
+            <ButtonIncr incr={increment} noIncr={noIncrement} m="0" />
         </div>
     );
 };
