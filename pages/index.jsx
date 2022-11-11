@@ -21,4 +21,6 @@ export default function App() {
             <MarkdownRenderer file="/content/homepage.md" />
         </Content>
     );
-}
+};
+
+export default App;

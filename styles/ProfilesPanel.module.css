@@ -1,0 +1,46 @@
+.profileTable {
+    border-spacing: 0;
+    max-width: 50%;
+    margin: 0 auto;
+}
+
+.profileTable th,
+.profileTable td {
+    border: 0.5px solid lightgrey;
+    padding: 0.5em 0.5em;
+}
+.headerRow th {
+    background: #eee;
+}
+
+.idCell {
+    text-align: center;
+    font-family: monospace;
+}
+
+.incrCell {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.input {
+    padding: 0.5em;
+    border: 1px solid grey;
+}
+
+.profileTable tr:last-child td:first-child {
+    border-bottom-left-radius: 0.25em;
+}
+
+.profileTable tr:last-child td:last-child {
+    border-bottom-right-radius: 0.25em;
+}
+
+.profileTable .headerRow th:first-child {
+    border-top-left-radius: 0.25em;
+}
+
+.profileTable .headerRow th:last-child {
+    border-top-right-radius: 0.25em;
+}

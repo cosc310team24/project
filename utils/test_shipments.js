@@ -6,7 +6,7 @@
 export const TEST_ITEMS = [
     {
         shipment_id: 123,
-        contents: "Item 1",
+        contents: ["Item 1"],
         price: 91.99,
     },
     {
@@ -16,13 +16,12 @@ export const TEST_ITEMS = [
     },
     {
         shipment_id: 999,
-        contents: "Item 2, Item 3",
+        contents: ["Item 2", "Item 3"],
         price: 10.99,
-    }
-    ,
+    },
     {
         shipment_id: 999,
-        contents: "Item 2, Item 3",
+        contents: ["Item 2", "Item 3"],
         price: 10.99,
-    }
+    },
 ];
