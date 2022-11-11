@@ -3,7 +3,7 @@
  * Copyright (c) 2022 Connor Doman
  */
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, StrictMode } from "react";
 import Incrementor from "/components/Incrementor.jsx";
 import CartBanner from "/components/Cart.jsx";
 import OrderItem from "/public/libs/order_item.js";
@@ -77,6 +77,10 @@ export const OrderPanel = ({ orderCallback, testOrderItems }) => {
         // console.log(orderItems);
     };
 
+    const handleCartUpdate = (cart) => {
+        setCartItems(cart);
+    };
+
     const deleteOneItem = (item) => {
         updateItems(item, 0);
     };
@@ -104,9 +108,12 @@ export const OrderPanel = ({ orderCallback, testOrderItems }) => {
             <CartBanner
                 cart={cartItems}
                 onClear={handleClear}
-                onItemDelete={deleteOneItem}
+                // onItemDelete={deleteOneItem}
+                onUpdate={handleCartUpdate}
             />
-            <ul className={styles.orderList}>{items}</ul>
+            <ul className={styles.orderList}>
+                <StrictMode>{items}</StrictMode>
+            </ul>
         </div>
     );
 };

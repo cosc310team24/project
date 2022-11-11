@@ -36,45 +36,59 @@ export const CartBanner = ({
     cart = {},
     onClear = () => {},
     onItemDelete = () => {},
+    onUpdate = (c) => {},
 }) => {
     const [cartSize, setCartSize] = useState(0);
     const [localCart, setLocalCart] = useState(cart);
 
     useEffect(() => {
-        const size = Object.keys(cart).length;
-        const total = Object.values(cart).reduce((a, b) => a + b[1], 0);
-        if (cart) setCartSize(total);
+        // const size = Object.keys(cart).length;
+        if (cart !== localCart) setLocalCart(cart);
     }, [cart]);
+
+    useEffect(() => {
+        //onUpdate(localCart);
+        if (onUpdate) onUpdate(localCart);
+        const size = Object.values(localCart).reduce((a, b) => a + b[1], 0);
+        setCartSize(size);
+    }, [localCart]);
 
     const handleItemDelete = (item) => {
         // callback to OrderPanel.updateItems(itemId, quantity);
-        if (onItemDelete) {
+        /*if (onItemDelete) {
             onItemDelete(item);
         } else {
             delete cart[item.id];
-        }
+        }*/
+
+        localDeleteCartItem(item);
+
+        if (onUpdate) onUpdate(localCart);
     };
 
-    const localDelete = (item) => {
-        let oldLen = Object.keys(cartItems).length;
+    const localDeleteCartItem = (item) => {
+        let oldLen = Object.keys(localCart).length;
+
         // Copy state object
-        let newCartItems = { ...cartItems };
+        let newCartItems = { ...localCart };
         // newCartItems[item.id] = [item, quantity];
 
-        // Remove item if quantity is 0
-        if (quantity === 0) {
-            delete newCartItems[item.id];
-            console.log(`Successfully removed item with id: ${item.id}`);
-        }
+        // Remove item since quantity is 0
+        delete newCartItems[item.id];
+        console.log(`Locally removed item with id: ${item.id}`);
 
         // Set to new updated value
-        setCartItems(newCartItems);
+        setLocalCart(newCartItems);
 
         // console.log(orderItems);
     };
 
-    const itemStrings = Object.keys(cart).map((key) => {
-        const cartItem = cart[key];
+    const localClearCart = () => {
+        setLocalCart({});
+    };
+
+    const itemStrings = Object.keys(localCart).map((key) => {
+        const cartItem = localCart[key];
         return (
             <CartListItem
                 key={key}
