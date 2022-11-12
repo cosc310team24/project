@@ -4,8 +4,11 @@
     justify-content: center;
     align-items: center;
     margin: 1em 0;
-    width: 50%;
+    min-width: max-content;
     align-self: center;
+    border-top: 0.05em solid grey;
+    border-bottom: 0.05em solid grey;
+    border-radius: 0.3em;
 }
 
 .incrementor span {
@@ -15,16 +18,28 @@
     align-self: center;
 }
 
+.incrementor button {
+    height: 1.5rem;
+    font-size: 1em;
+}
+
 .incButton {
     width: 100%;
 }
 
 .count {
-    font-size: 10pt;
-    width: 2em;
-    height: 1.8rem;
+    font-size: 1em;
+    height: 1.8em;
+    width: 3em;
     text-align: center;
     border: none;
-    border-top: 0.05rem solid black;
-    border-bottom: 0.05rem solid black;
+    border-radius: 0;
+    outline: 0;
+}
+
+@media only screen and (max-width: 750px) {
+    .count {
+        width: 2em;
+        height: 1.5rem;
+    }
 }

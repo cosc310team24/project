@@ -1,18 +1,21 @@
 .cartBanner {
     display: flex;
     flex-direction: row;
-    z-index: 0;
+    align-items: center;
+    z-index: -1;
     padding: 2rem;
-    overflow-x: auto;
+    /* overflow-x: auto; */
 }
 
 .cartListItem {
     flex: 1;
     display: flex;
     margin: 0rem 0.5rem;
-    padding: 0.5rem;
+    /* padding: 0.5rem; */
     align-items: center;
     border: 1px solid darkgrey;
+    height: 2.7em;
+    min-width: max-content;
 }
 
 .cartListItem .deleteButton {
@@ -23,11 +26,12 @@
 .cartInfo .deleteButton {
     font-size: 16pt;
     width: 3em;
+    height: 2.75rem;
 }
 
 .itemInfo {
-    margin: 0 0 0 0.5em;
-    min-width: 5em;
+    margin: 0 0.5em 0 0.25em;
+    min-width: max-content;
 }
 
 .cartList {
@@ -35,11 +39,36 @@
     flex-direction: row;
     margin: 0;
     overflow-x: auto;
+    padding: 1px 0;
+    height: 3.75em;
 }
 
 .cartInfo {
     display: flex;
     flex-direction: row;
     align-items: center;
-    min-width: 16em;
+}
+
+.cartSymbol {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.cartSymbolAmt {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 0 0.5em;
+    align-self: center;
+    justify-content: center;
+}
+
+.cartSymbolIcon {
+    font-size: 16pt;
+}
+@media only screen and (max-width: 750px) {
+    .cartBanner {
+        padding: 1em 0.5em 0 0.5rem;
+    }
 }

@@ -3,135 +3,175 @@
  * Copyright (c) 2022 Connor Doman
  */
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, StrictMode } from "react";
 import Incrementor from "/components/Incrementor.jsx";
 import CartBanner from "/components/Cart.jsx";
+import OrderItem from "/public/libs/order_item.js";
 import styles from "/styles/OrderPanel.module.css";
+import { Button } from "/components/Button.jsx";
+import {
+    FaFirstAid,
+    FaHandHoldingMedical,
+    FaHandHoldingHeart,
+    FaHeartbeat,
+    FaHospital,
+    FaLaptopMedical,
+    FaLungs,
+    FaLungsVirus,
+    FaMedkit,
+    FaPills,
+    FaPlusCircle,
+    FaPrescriptionBottleAlt,
+    FaPrescriptionBottle,
+    FaPrescription,
+    FaPumpMedical,
+    FaRadiation,
+    FaShieldVirus,
+    FaSoap,
+} from "react-icons/fa";
+import { getRandomInt } from "/public/libs/random_with_seed.js";
 
-export class OrderItem {
-    static priceFormatter = new Intl.NumberFormat("en-CA", {
-        style: "currency",
-        currency: "CAD",
-    });
+export const ITEM_IMAGES = [
+    <FaFirstAid />,
+    <FaHandHoldingMedical />,
+    <FaHandHoldingHeart />,
+    <FaHeartbeat />,
+    <FaHospital />,
+    <FaLaptopMedical />,
+    <FaLungs />,
+    <FaLungsVirus />,
+    <FaMedkit />,
+    <FaPills />,
+    <FaPlusCircle />,
+    <FaPrescriptionBottleAlt />,
+    <FaPrescriptionBottle />,
+    <FaPrescription />,
+    <FaPumpMedical />,
+    <FaRadiation />,
+    <FaShieldVirus />,
+    <FaSoap />,
+];
 
-    static generatedTestItems = (() => {
-        let items = [];
-        for (let i = 0; i < 100; i++) {
-            items.push(
-                new OrderItem(i, `Item ${i}`, Math.floor(Math.random() * 100))
-            );
-        }
-        return items;
-    })();
-
-    constructor(id, name, price) {
-        this.id = id;
-        this.name = name;
-
-        this.price = price;
+export const RANDOM_ITEM_IMAGES = ((n) => {
+    let arr = [];
+    for (let i = 0; i < n; i++) {
+        arr.push(ITEM_IMAGES[getRandomInt(0, ITEM_IMAGES.length)]);
     }
+    return arr;
+})(100);
 
-    get priceString() {
-        return OrderItem.priceFormatter.format(this.price);
-    }
+export const randomFromArray = (arr) => {
+    return arr[Math.floor(Math.random() * arr.length)];
+};
 
-    toString() {
-        return `${this.id}. ${this.name}`;
-    }
-}
-
-export const OrderListItem = ({ item, quantity, onChange }) => {
+export const OrderListItem = ({ item, onChange, update = false }) => {
     const [id, setId] = useState(item.id);
-    const [count, setCount] = useState(quantity);
+    const [price, setPrice] = useState(0);
+    const [count, setCount] = useState(0);
 
     const it =
         item instanceof OrderItem
             ? item
             : new OrderItem(item.id, item.name, item.price);
 
-    const handleChange = (count) => {
+    const handleChange = (qty) => {
         // console.log(`OrderListItem ${id}: ${count}`);
-        //setCount(count);
+        setCount(qty);
+        setPrice(it.price * qty);
         console.log(item);
+        // onChange(item, qty);
+    };
+
+    const handleClick = () => {
         onChange(item, count);
     };
 
-    const increment = (qty) => {
-        handleChange(qty + 1);
-    };
-
-    const decrement = (qty) => {
-        if (qty > 0) handleChange(qty - 1);
-    };
-
     return (
-        <li className={styles.orderItem}>
-            <div className={styles.itemImage}></div>
+        <li data-cy="order-list-item" className={styles.orderItem}>
+            <div className={styles.itemImage}>{RANDOM_ITEM_IMAGES[id]}</div>
             <span>
                 {it.toString()}
                 <br />
                 {it.priceString}
             </span>
-            <Incrementor
-                id={it.id}
-                value={quantity}
-                onChange={handleChange}
-                onIncrement={increment}
-                onDecrement={decrement}
-            />
+            <Incrementor id={it.id} onChange={handleChange} min={0} />
             <span className={styles.itemTotal}>
-                {OrderItem.priceFormatter.format(it.price * quantity)}
+                {OrderItem.priceFormatter.format(price)}
             </span>
+            <Button
+                name="add"
+                onClick={handleClick}
+                disabled={count <= 0}
+                style={{
+                    minWidth: "50%",
+                    alignSelf: "center",
+                }}
+            >
+                {update && count > 0 ? "Update" : "Add"}
+            </Button>
         </li>
     );
 };
 
 export const OrderPanel = ({ orderCallback, testOrderItems }) => {
-    const [orderItems, setOrderItems] = useState({});
+    const [cartItems, setCartItems] = useState({});
+    const [orderableItems, setOrderableItems] = useState(testOrderItems);
 
     const updateItems = (item, quantity) => {
-        let oldLen = Object.keys(orderItems).length;
+        let oldLen = Object.keys(cartItems).length;
         // Copy state object
-        let newOrderItems = { ...orderItems };
-        newOrderItems[item.id] = [item, quantity];
+        let newCartItems = { ...cartItems };
+        newCartItems[item.id] = [item, quantity];
 
         // Remove item if quantity is 0
         if (quantity === 0) {
-            delete newOrderItems[item.id];
+            delete newCartItems[item.id];
             console.log(`Successfully removed item with id: ${item.id}`);
         }
 
         // Set to new updated value
-        setOrderItems(newOrderItems);
+        setCartItems(newCartItems);
 
         // console.log(orderItems);
     };
 
-    const items = testOrderItems?.map((item) => {
+    const handleCartUpdate = (cart) => {
+        setCartItems(cart);
+    };
+
+    const deleteOneItem = (item) => {
+        updateItems(item, 0);
+    };
+
+    const items = orderableItems?.map((item) => {
         let i = new OrderItem(item.id, item.name, item.price);
-        const qty = orderItems[i.id] ? orderItems[i.id][1] : 0;
+        const qty = cartItems[i.id] ? cartItems[i.id][1] : 0;
         return (
             <OrderListItem
                 key={i.id}
                 item={i}
                 onChange={updateItems}
-                quantity={qty}
+                update={qty > 0}
             />
         );
     });
 
     const handleClear = () => {
-        setOrderItems({});
+        setCartItems({});
     };
 
     return (
-        <div>
+        <div data-cy="order-panel">
+            {/* <p>{JSON.stringify(cartItems)}</p> */}
             <CartBanner
-                cart={orderItems}
+                cart={cartItems}
                 onClear={handleClear}
-                onItemDelete={updateItems}
+                // onItemDelete={deleteOneItem}
+                onUpdate={handleCartUpdate}
             />
-            <ul className={styles.orderList}>{items}</ul>
+            <ul className={styles.orderList}>
+                <StrictMode>{items}</StrictMode>
+            </ul>
         </div>
     );
 };

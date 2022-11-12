@@ -3,12 +3,17 @@
  * Copyright (c) 2022 Connor Doman
  */
 
-import Link from "next/link";
+import PageLink from "/components/PageLink";
+
+export const linkify = (str) => {
+    let result = str.trim().replace(" ", "-").toLowerCase();
+    return result.slice(0, str.length > 30 ? 30 : str.length);
+};
 
 export const NavLink = ({ link }) => {
     return (
         <li className="navLink">
-            <Link href={"/" + link.toLowerCase()}>
+            <Link href={"/" + linkify(link)}>
                 <a className="link-unstyled">{link}</a>
             </Link>
         </li>

@@ -49,11 +49,12 @@ input[type="text"] {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
     flex-wrap: wrap;
+    text-align: right;
 }
 
-.navLink {
+.pageLink {
     margin: 0.25em 1em;
     padding-bottom: 0.25em;
     color: white;
@@ -61,7 +62,7 @@ input[type="text"] {
     border-bottom: 0.05em solid transparent;
 }
 
-.navLink:hover {
+.pageLink:hover {
     cursor: pointer;
     border-bottom: 0.05em solid white;
 }
@@ -178,20 +179,21 @@ input[type="text"] {
 */
 
 @media only screen and (max-width: 750px) {
-    .orderItem {
-        width: 33%;
-    }
-
     .navHeader {
         padding: 0 1rem;
     }
 
     .navLinks {
+        height: 100%;
         display: flex;
         flex-direction: column;
+        flex-wrap: nowrap;
+        overflow-y: auto;
+        align-self: center;
     }
 
     .navLink {
-        align-self: end;
+        align-self: flex-end;
+        font-size: 12pt;
     }
 }

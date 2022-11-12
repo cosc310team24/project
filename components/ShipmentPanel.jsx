@@ -1,8 +1,3 @@
-/*
- * Created on Sun Oct 09 2022
- * Copyright (c) 2022 Connor Doman
- */
-
 import { useState, useEffect, useRef } from "react";
 import styles from "/styles/ShipmentPanel.module.css";
 import SearchBar from "./SearchBar";
