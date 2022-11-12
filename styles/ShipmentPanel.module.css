@@ -9,6 +9,19 @@
     overflow: hidden;
     margin-bottom: 2rem;
 }
+/* shipment panel */
+.shipmentPanel
+{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 1rem;
+    padding: 1rem;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
 
 .shipment {
     transition: box-shadow .3s;
