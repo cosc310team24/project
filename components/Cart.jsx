@@ -131,7 +131,12 @@ export const CartBanner = ({
                     className={styles.cartListItem}
                     style={{ border: "1px solid transparent" }}
                 >
-                    <ButtonCart amt={cartSize} m="0" />
+                    <ButtonCart
+                        amt={cartSize}
+                        m="0"
+                        link="/checkout"
+                        data={cart}
+                    />
                 </li>
                 {itemStrings}
             </ul>

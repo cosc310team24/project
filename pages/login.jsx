@@ -6,13 +6,15 @@ import { useEffect } from "react";
 import { supabase } from "/utils/supabase.js";
 import Content from "/components/Content.jsx";
 import TextColumn from "/components/TextColumn.jsx";
+import { useUser } from "../context/user";
 
-export const Login = () => {
+const Login = () => {
+    const { login } = useUser();
+
     useEffect(() => {
-        supabase.auth.signInWithOAuth({
-            provider: "github",
-        });
+        login();
     }, []);
+
     return (
         <Content title="Login">
             <TextColumn>

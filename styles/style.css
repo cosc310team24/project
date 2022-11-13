@@ -20,6 +20,22 @@ input[type="text"] {
     outline: none;
 }
 
+table tr:last-child td:first-child {
+    border-bottom-left-radius: 0.25em;
+}
+
+table tr:last-child td:last-child {
+    border-bottom-right-radius: 0.25em;
+}
+
+table thead tr th:first-child {
+    border-top-left-radius: 0.25em;
+}
+
+table thead tr th:last-child {
+    border-top-right-radius: 0.25em;
+}
+
 /*
      Useful Global Styles
  */

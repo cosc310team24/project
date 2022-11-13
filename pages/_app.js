@@ -1,7 +1,11 @@
 import "../styles/style.css";
-import { useState } from "react";
+import UserProvider from "../context/user";
 
 // This default export is required in a new `pages/_app.js` file.
 export default function MyApp({ Component, pageProps }) {
-    return <Component {...pageProps} />;
+    return (
+        <UserProvider>
+            <Component {...pageProps} />
+        </UserProvider>
+    );
 }

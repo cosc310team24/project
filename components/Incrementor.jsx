@@ -59,8 +59,13 @@ export const Incrementor = ({
 
     const updateCountFromInput = (elem) => {
         const name = elem.name;
-        let cleanVal = elem.value.replace(/\D/g, "");
+        let cleanVal = elem.value.replace(/^(?!-[0-9]*)$/g, "");
         const val = cleanVal === "" ? 0 : parseInt(cleanVal);
+        if (val > max) {
+            val = max;
+        } else if (val < min) {
+            val = min;
+        }
         setInputCount(val);
 
         console.warn("handleChange... -> " + val);
