@@ -13,7 +13,7 @@ import MarkdownRenderer from "/components/MarkdownRenderer.jsx";
  * Page content and app entry point
  */
 
-export default function App() {
+export const App = () => {
     useEffect(() => {}, []);
 
     return (

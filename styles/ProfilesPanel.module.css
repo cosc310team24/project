@@ -18,11 +18,11 @@
     font-family: monospace;
 }
 
-.incrCell {
+/* .incrCell {
     display: flex;
     flex-direction: row;
     justify-content: center;
-}
+} */
 
 .input {
     padding: 0.5em;

@@ -16,7 +16,10 @@ export const Profiles = ({ profiles }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        if (profiles) setLoading(false);
+        if (loading && profiles) {
+            setLoading(false);
+            console.log(profiles);
+        }
     }, [profiles]);
 
     return (

@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     margin: 1em 0;
-    min-width: max-content;
+    max-width: min-content;
     align-self: center;
     border-top: 0.05em solid grey;
     border-bottom: 0.05em solid grey;

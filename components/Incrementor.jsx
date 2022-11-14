@@ -5,7 +5,6 @@
 
 import { useState, useEffect, useRef } from "react";
 import { Button, ButtonDecr, ButtonIncr } from "/components/Button.jsx";
-import { FaPlus, FaMinus } from "react-icons/fa";
 import styles from "/styles/Incrementor.module.css";
 
 export const Incrementor = ({
@@ -15,8 +14,9 @@ export const Incrementor = ({
     onChange = undefined,
     onIncrement,
     onDecrement,
-    max = Infinity,
-    min = -Infinity,
+    max = 9999,
+    min = -9999,
+    ...props
 }) => {
     // const [count, setCount] = useState(0);
     const [inputCount, setInputCount] = useState(parseInt(initialValue));
@@ -59,8 +59,13 @@ export const Incrementor = ({
 
     const updateCountFromInput = (elem) => {
         const name = elem.name;
-        let cleanVal = elem.value.replace(/\D/g, "");
+        let cleanVal = elem.value.replace(/^(?!-[0-9]*)$/g, "");
         const val = cleanVal === "" ? 0 : parseInt(cleanVal);
+        if (val > max) {
+            val = max;
+        } else if (val < min) {
+            val = min;
+        }
         setInputCount(val);
 
         console.warn("handleChange... -> " + val);
@@ -92,7 +97,7 @@ export const Incrementor = ({
     };
 
     return (
-        <div className={styles.incrementor}>
+        <div className={styles.incrementor} style={props.style}>
             <ButtonDecr decr={decrement} noDecr={noDecrement} m="0" />
             <input
                 name={id}

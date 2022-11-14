@@ -3,7 +3,7 @@
  * Copyright (c) 2022 Connor Doman
  */
 
-import PageLink from "/components/PageLink";
+import Link from "next/link";
 
 export const linkify = (str) => {
     let result = str.trim().replace(" ", "-").toLowerCase();
