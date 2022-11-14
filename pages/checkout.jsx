@@ -5,7 +5,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { supabase } from "/utils/supabase.js";
-import { useUser } from "/context/user.jsx";
 import Content from "/components/Content.jsx";
 import TextColumn from "/components/TextColumn.jsx";
 import Incrementor from "/components/Incrementor.jsx";

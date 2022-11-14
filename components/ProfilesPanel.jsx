@@ -7,6 +7,7 @@ import Link from "next/link";
 import User from "/public/libs/user.js";
 import TextColumn from "/components/TextColumn";
 import styles from "/styles/ProfilesPanel.module.css";
+import TextBox from "/components/TextBox";
 
 import Incrementor from "/components/Incrementor.jsx";
 
@@ -33,6 +34,7 @@ export const ProfileCellIncrementor = ({ val, onChange, disabled }) => {
     return (
         <td className={styles.incrCell}>
             <Incrementor
+                initialValue={val}
                 onChange={handleChange}
                 max={5}
                 min={0}
@@ -51,12 +53,11 @@ export const ProfileInputCell = ({ val, onChange }) => {
 
     return (
         <td>
-            <input
-                className={styles.input + " total-radius"}
+            <TextBox
                 type="text"
                 value={currentValue}
-                onChange={(e) => {
-                    setCurrentValue(e.target.value);
+                onChange={(v) => {
+                    setCurrentValue(v);
                 }}
             />
         </td>

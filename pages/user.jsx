@@ -4,38 +4,49 @@
  */
 import { useEffect, useState } from "react";
 import { supabase } from "/utils/supabase.js";
+import { useRouter } from "next/router";
 import Content from "/components/Content.jsx";
 import TextColumn from "/components/TextColumn.jsx";
-import { useUser } from "../context/user";
+import Button from "/components/Button.jsx";
+import { useUser } from "../context/user-context";
 
 export const UserPage = () => {
-    const { user, isLoading } = useUser();
-    console.log("User data", user["data"]);
+    const [profile, setProfile] = useState(null);
+    const router = useRouter();
+
+    useEffect(() => {
+        fetchProfile();
+    });
+
+    const fetchProfile = async () => {
+        const profileData = await supabase.auth.getUser();
+        if (profileData) {
+            setProfile(profileData);
+        } else {
+            router.push("/login");
+        }
+    };
+
+    const signOut = async () => {
+        await supabase.auth.signOut();
+        router.push("/login");
+    };
 
     return (
         <Content title="User">
             <TextColumn>
-                {!isLoading && (
-                    <p className="mb-6">
-                        {user
-                            ? `Subscribed: ${user.data.id}`
-                            : "Not subscribed"}
-                    </p>
+                {!profile ? (
+                    <h1>Not Logged In</h1>
+                ) : (
+                    <div>
+                        <h1>{profile.email}</h1>
+                        <h2>ID: {profile.id}</h2>
+                        <Button onClick={signOut}>Sign Out</Button>
+                    </div>
                 )}
             </TextColumn>
         </Content>
     );
-};
-
-export const getStaticProps = async () => {
-    const { user, isLoading } = await useUser();
-
-    return {
-        props: {
-            user,
-            isLoading,
-        },
-    };
 };
 
 export default UserPage;

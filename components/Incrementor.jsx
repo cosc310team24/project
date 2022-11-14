@@ -14,8 +14,8 @@ export const Incrementor = ({
     onChange = undefined,
     onIncrement,
     onDecrement,
-    max = Infinity,
-    min = -Infinity,
+    max = 9999,
+    min = -9999,
     ...props
 }) => {
     // const [count, setCount] = useState(0);

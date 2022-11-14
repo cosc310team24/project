@@ -3,6 +3,7 @@
  * Copyright (c) 2022 Connor Doman
  */
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import Incrementor from "/components/Incrementor.jsx";
 import { ButtonGo } from "/components/Button.jsx";
 import OrderItem, { asPrice } from "/public/libs/order_item.js";
@@ -81,16 +82,31 @@ export const CheckoutTable = ({ items }) => {
                     <td className={style.itemName}>
                         <strong>Total:</strong>
                     </td>
-                    <td className={style.itemPrice}>{asPrice(totalPrice)}</td>
+                    <td className={style.itemPrice}>
+                        <strong>{asPrice(totalPrice)}</strong>
+                    </td>
                     <td className={style.itemQty}>
-                        <ButtonGo
-                            w="100%"
-                            m="0 auto"
-                            title="Order Now"
-                            disabled={totalQty === 0 || isNaN(totalPrice)}
+                        <Link
+                            href={{
+                                pathname: "/order",
+                            }}
                         >
-                            Order ({totalQty})
-                        </ButtonGo>
+                            <ButtonGo
+                                w="100%"
+                                m="0 auto"
+                                title="Order Now"
+                                disabled={totalQty === 0 || isNaN(totalPrice)}
+                                onClick={() =>
+                                    alert(
+                                        `Ordered ${totalQty} items for ${asPrice(
+                                            totalPrice
+                                        )}`
+                                    )
+                                }
+                            >
+                                Order ({totalQty})
+                            </ButtonGo>
+                        </Link>
                     </td>
                 </tr>
             </tbody>
