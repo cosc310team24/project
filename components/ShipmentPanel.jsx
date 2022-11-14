@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import styles from "/styles/ShipmentPanel.module.css";
 import SearchBar from "./SearchBar";
+import Generator from "/utils/generators.js";
 
 //Shipment class
 export class Shipment {
@@ -20,6 +21,14 @@ export class Shipment {
 
     get priceString() {
         return Shipment.priceFormatter.format(this.price);
+    }
+
+    get key() {
+        return `${this.uniqueID}_${this.shipment_id}`;
+    }
+
+    get contentString() {
+        return this.content.join(", ");
     }
 
     toString() {
@@ -142,7 +151,6 @@ export const ShipmentList = ({ item }) => {
         </li>
     );
 };
-
 
 //     const it = new Shipment(item.shipment_id, item.price, item.status, item.priority, item.date, item.content);
 //     return (

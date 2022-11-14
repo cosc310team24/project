@@ -3,6 +3,10 @@
  * Copyright (c) 2022 Connor Doman
  */
 
+export const asPrice = (value) => {
+    return OrderItem.priceFormatter.format(value);
+};
+
 export class OrderItem {
     static priceFormatter = new Intl.NumberFormat("en-CA", {
         style: "currency",
@@ -16,7 +20,11 @@ export class OrderItem {
     }
 
     get priceString() {
-        return OrderItem.priceFormatter.format(this.price);
+        return asPrice(this.price);
+    }
+
+    priceMultipleStr(quantity) {
+        return asPrice(this.price * quantity);
     }
 
     toString() {

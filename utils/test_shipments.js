@@ -20,7 +20,6 @@ export const TEST_ITEMS = [
                 price: 69.69,
             }
         ]
-    
     },
     {
         shipment_id: 456,

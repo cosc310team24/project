@@ -117,3 +117,21 @@ yarn cypress
 This will open the Cypress test runner. Select `Component Testing`. Then select the browser you'd like to run the tests in. Choose the component you'd like to test and then your results will be displayed.
 
 If your component fails the tests, Cypress will inform you where and how the failure occurred. Edit your components appropriately.
+
+## Features
+
+#### Profile Displays
+
+Allows users to see user profiles in the system. 
+
+#### Passing Cart to Orders
+
+Allows the system to read the items currently in the cart and pass them over to be ordered. 
+
+#### Passing Orders to Shipments
+
+Allows the system to move items that are registered as ordered to be shipped. 
+
+#### Search Active Orders
+
+Allows for searching through active orders to view a specific order. 

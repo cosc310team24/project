@@ -4,6 +4,7 @@
  */
 import { useEffect, useState } from "react";
 import { FaPlus, FaMinus, FaTimes, FaShoppingCart } from "react-icons/fa";
+import Link from "next/link";
 import styles from "/styles/Button.module.css";
 
 export const UIButton = ({
@@ -15,6 +16,7 @@ export const UIButton = ({
     h = "2em",
     w = "auto",
     m = "0.25em",
+    p = "0.5em",
     title = "",
     style = {},
     ...props
@@ -36,6 +38,7 @@ export const UIButton = ({
                 width: w,
                 margin: m,
                 fontSize: f,
+                padding: p,
             }}
             title={title}
         >
@@ -76,19 +79,37 @@ export const ButtonDelete = (props) => {
 };
 
 export const ButtonCart = ({ amt, onClick = () => {}, ...props }) => {
+    const [cartLink, setCartLink] = useState("/#");
+    const [cartData, setCartData] = useState({});
+
+    useEffect(() => {
+        setCartLink(props.link);
+    }, [props.link]);
+
+    useEffect(() => {
+        setCartData(props.data);
+    }, [props.data]);
+
     return (
-        <ButtonGo
-            name="buttonCart"
-            onClick={onClick}
-            disabled={amt === 0}
-            title="Checkout with this cart"
-            {...props}
+        <Link
+            href={{
+                pathname: cartLink,
+                query: { data: JSON.stringify(cartData) },
+            }}
         >
-            <FaShoppingCart className={styles.cartSymbolIcon} />
-            <span className={styles.cartSymbolAmt} data-cy="cart-size">
-                ({amt})
-            </span>
-        </ButtonGo>
+            <ButtonGo
+                name="buttonCart"
+                onClick={onClick}
+                disabled={amt === 0}
+                title="Checkout with this cart"
+                {...props}
+            >
+                <FaShoppingCart className={styles.cartSymbolIcon} />
+                <span className={styles.cartSymbolAmt} data-cy="cart-size">
+                    ({amt})
+                </span>
+            </ButtonGo>
+        </Link>
     );
 };
 
