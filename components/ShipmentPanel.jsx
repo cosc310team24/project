@@ -4,10 +4,11 @@ import SearchBar from "./SearchBar";
 
 //Shipment class
 export class Shipment {
-    constructor(shipment_id, price, status, date, content) {
+    constructor(shipment_id, price, status, priority, date, content) {
         this.shipment_id = shipment_id;
         this.price = price;
         this.status = status;
+        this.priority = priority;
         this.date = date;
         this.content = content;
     }
@@ -25,13 +26,39 @@ export class Shipment {
         return `${this.shipment_id}. ${this.content}. ${this.priceString}. ${this.status}`;
     }
     
+    //status can be "Processing", "In Transit", "Delivered", or "Cancelled"
+    //use int to represent status
+    get statusString() {
+        switch (this.status) {
+            case 0:
+                return "Processing";
+            case 1:
+                return "In Transit";
+            case 2:
+                return "Delivered";
+            case 3:
+                return "Cancelled";
+            default:
+                return "Unknown";
+        }
+    }
+    get priorityString() {
+        switch (this.priority) {
+            case 0:
+                return "None";
+            case 1:
+                return "Rush";
+            default:
+                return "None";
+        }
+    }
     setStatus(status) {
         this.status = status;
     }
 }
 
 export const ShipmentList = ({ item }) => {
-    const it = new Shipment(item.shipment_id, item.price, item.status, item.date, item.content);
+    const it = new Shipment(item.shipment_id, item.price, item.status, item.priority, item.date, item.content);
     return (
         <li className={styles.shipment}>
             <span>
@@ -44,7 +71,10 @@ export const ShipmentList = ({ item }) => {
                 <b>Total Price:</b> {it.priceString}
             </span>
             <span>
-                <b>Status:</b> {it.status}
+                <b>Status:</b> {it.statusString}
+            </span>
+            <span style={{ color: it.priority === 1 ? "orange" : "black" }}>
+                <b>Priority:</b> {it.priorityString}
             </span>
             <span>
                 <b> <br></br> Content: </b>
@@ -77,8 +107,8 @@ export const ShipmentList = ({ item }) => {
                 )}
             </span>
             <span>
-                <button onClick={() => it.setStatus("rush")}>Rush</button>
-                <button onClick={() => it.setStatus("cancelled")}>Cancel</button>
+                <button onClick={() => it.setStatus(1)}>Rush</button>
+                <button onClick={() => it.setStatus(3)}>Cancel</button>
             </span>
         </li>
     );
@@ -133,6 +163,7 @@ const ShipmentPanel = ({ testShipments }) => {
                 <button onClick={() => setSortType("date")}>Sort by Date</button>
                 <button onClick={() => setSortType("status")}>Sort by Status</button>
                 <button onClick={() => setSortType("price")}>Sort by Price</button>
+                <button onClick={() => setSortType("priority")}>Sort by Priority</button>
             </div>
             <div className={styles.sortDirection}>
                 <button onClick={() => setSortDirection("ascending")}>Ascending</button>

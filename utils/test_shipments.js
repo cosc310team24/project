@@ -2,7 +2,8 @@ export const TEST_ITEMS = [
     {
         shipment_id: 123,
         price: 91.99,
-        status: "pending",
+        status: 1,
+        priority: 0,
         date: "2021-10-20",
         content: [
             {
@@ -25,7 +26,8 @@ export const TEST_ITEMS = [
         shipment_id: 456,
         contents: new Array(2).fill("Item 2"),
         price: 5.99,
-        status: "pending",
+        status: 1,
+        priority: 1,
         date: "2021-08-20",
         content: [
             {
@@ -41,6 +43,7 @@ export const TEST_ITEMS = [
         shipment_id: 999,
         contents: "Item 2, Item 3",
         price: 10.99,
+        priority: 2
     }
     ,
     {
