@@ -40,10 +40,10 @@ export const TEST_ITEMS = [
     },
     {
         shipment_id: 999,
-        contents: "Item 2, Item 3",
         price: 10.99,
         status: 0,
         priority: 2,
+        date: "2021-08-20",
         content: [
             { 
                 item_id: 2,
@@ -57,10 +57,17 @@ export const TEST_ITEMS = [
     ,
     {
         shipment_id: 420,
-        contents: "Item 2, Item 3",
         price: 0,
         status: 3,
-        priority: 2
-
+        priority: 2,
+        date: "2021-08-20",
+        content: [
+            { 
+                item_id: 2,
+                name: "item2",
+                quantity: 1,
+                price: 10.99,
+            }
+        ]
     }
 ];

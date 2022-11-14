@@ -1,14 +1,3 @@
-.orderList {
-    display: block;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin: 1rem;
-    padding: 1rem;
-    width: 100%;
-    overflow: hidden;
-    margin-bottom: 2rem;
-}
 .searchBar {
     align-items: left;
     display: flex;
@@ -51,21 +40,25 @@
 }
 
 .container {
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 100%;
-    margin-top: 2rem;
-    margin-left: 2rem;
+    margin: 2rem;
+    margin: 2rem;
 }
 .shipment {
+    overflow: hidden;
+    max-width: 90%;
     transition: box-shadow .3s;
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 100%;
     height: auto;
     text-align: left;
     margin: 10px;
+    padding: 10px;
     border-radius:4px;
     background: #f0f0f0;
     float: inline;
