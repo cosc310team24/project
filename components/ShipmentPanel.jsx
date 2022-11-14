@@ -4,7 +4,7 @@ import SearchBar from "./SearchBar";
 
 //Shipment class
 export class Shipment {
-    constructor(shipment_id, price, status, date, content = []) {
+    constructor(shipment_id, price, status, date, content) {
         this.shipment_id = shipment_id;
         this.price = price;
         this.status = status;
@@ -24,6 +24,10 @@ export class Shipment {
     toString() {
         return `${this.shipment_id}. ${this.content}. ${this.priceString}. ${this.status}`;
     }
+    
+    setStatus(status) {
+        this.status = status;
+    }
 }
 
 export const ShipmentList = ({ item }) => {
@@ -37,20 +41,48 @@ export const ShipmentList = ({ item }) => {
                 <b>Date: </b> { it.date }
             </span>
             <span>
-                <b>Price:</b> {it.priceString}
+                <b>Total Price:</b> {it.priceString}
             </span>
             <span>
                 <b>Status:</b> {it.status}
             </span>
             <span>
-                <b>Content:</b> {it.content}
+                <b> <br></br> Content: </b>
+            </span> 
+            <span> 
+                {/* // create new div for each item in content
+                // check if content is undefined */}
+                {item.content === undefined ? (
+                    <div>
+                        <b>Content:</b> No content
+                    </div>
+                ) : (
+                    // check if content is empty
+                    item.content.length === 0 ? (
+                        <div>
+                            <b>Content:</b> No content
+                        </div>
+                    ) : (
+                        // content is not empty
+                        // create string to return item_id, name, quantity, and price
+                        item.content.map((item) => (
+                            <div>
+                                <b>Item ID:</b> {item.item_id}
+                                <b>Name:</b> {item.name}
+                                <b>Quantity:</b> {item.quantity}
+                                <b>Price:</b> {Shipment.priceFormatter.format(item.price)}
+                            </div>
+                        ))
+                    )
+                )}
+            </span>
+            <span>
+                <button onClick={() => it.setStatus("rush")}>Rush</button>
+                <button onClick={() => it.setStatus("cancelled")}>Cancel</button>
             </span>
         </li>
     );
 };
-
-//style for the shipment panel
-// Path: styles/ShipmentPanel.module.css
 
 const ShipmentPanel = ({ testShipments }) => {
     const [filteredShipments, setFilteredShipments] = useState([]);

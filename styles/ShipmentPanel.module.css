@@ -71,6 +71,19 @@
     float: inline;
     padding: 1rem;
 }
+.shipment button{
+    background-color: #0069ed; 
+    border: 1px solid #0069ed; 
+    color: white; /* White text */
+    padding: 5px 12px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    float: left; /* Float the buttons side by side */
+    border-radius:4px;
+    margin: 5px;
+}
+.shipment button:hover{
+    background-color: #0e51b6;
+}
 
 .shipment:hover {
     box-shadow: 0 0 11px rgba(33,33,33,.2); 
