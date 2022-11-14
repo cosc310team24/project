@@ -9,7 +9,55 @@
     overflow: hidden;
     margin-bottom: 2rem;
 }
+.searchBar {
+    align-items: left;
+    display: flex;
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+.sortButtons button {
+    background-color: #0069ed; 
+    border: 1px solid #0069ed; 
+    color: white; /* White text */
+    padding: 10px 24px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    float: left; /* Float the buttons side by side */
+    border-radius:4px;
+    margin: 5px;
+  }
+.sortButtons:after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+.sortButtons button:active {
+    background-color: #0e51b6;
+  }
+.sortButtons button:hover{
+    background-color: #0e51b6;
+}
+.sortDirection button {
+    background-color: #656565; 
+    border: 1px solid #656565; 
+    color: white; /* White text */
+    padding: 10px 24px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    float: left; /* Float the buttons side by side */
+    border-radius:4px;
+    margin: 5px;
+}
+.sortDirection button:hover{
+    background-color: #1a1a1a;
+}
 
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    margin-top: 2rem;
+    margin-left: 2rem;
+}
 .shipment {
     transition: box-shadow .3s;
     display: flex;
