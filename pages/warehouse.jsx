@@ -1,11 +1,11 @@
 import Content from "/components/Content.jsx";
 import InventoryPanel from "/components/InventoryPanel.jsx";
-import { testInventoryItems } from "/components/InventoryPanel.jsx";
+import { TEST_ITEMS } from "/utils/test_warehouse.js";
 
 const Warehouse = () => {
     return (
         <Content title="Warehouse">
-            <InventoryPanel inventoryItems={testInventoryItems} />
+            <InventoryPanel inventoryItems={TEST_ITEMS} />
         </Content>
     );
 };

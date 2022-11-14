@@ -1,75 +1,72 @@
+// inventory panel lists all the items in the inventory
 
+import React from "react";
+import styles from "/styles/InventoryPanel.module.css";
 import { useState, useEffect, useRef } from "react";
 
-export class InventoryItem {
-    static priceFormatter = new Intl.NumberFormat("en-CA", {
-        style: "currency",
-        currency: "CAD",
-    });
-
-    constructor(id, name, price, quantity) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.quantity = quantity;
+//Warehouse class 
+// //total space, remaining space, ID, changes to inventory
+export class Warehouse {
+    constructor(warehouse_id, total_space, remaining_space, inventory = [], changes = []) {
+        this.warehouse_id = warehouse_id;
+        this.total_space = total_space;
+        this.remaining_space = remaining_space;
+        this.inventory = inventory;
+        this.changes = changes;
     }
 
+    get spaceString() {
+        return Warehouse.spaceFormatter.format(this.remaining_space);
+    }
+
+    toString() {
+        return `${this.warehouse_id}. ${this.remaining_space}`;
+    }
+}
+// InventoryList class
+// dropdown menu to select current warehouse
+// warehouse id, total space, remaining space, inventory array, changes array
+// changes by default are not shown unless user clicks on a button to show them 
+
+
+
+export const InventoryList = ({ item }) => {
+    const it = new Warehouse(item.warehouse_id, item.total_space, item.remaining_space, item.inventory);
+    return (
+        <li className={styles.inventory_list}>
+            <span>
+                <h1>Inventory for warehouse ID: {it.warehouse_id}</h1>
+                Warehouse ID: {it.warehouse_id}
+                <br />
+                Total Space: {it.total_space}
+                <br />
+                Remaining Space: {it.remaining_space}
+                <br />
+                Inventory: {it.inventory}
+                <br />
+                <button>Inventory History</button>
+                Changes: {it.changes}
+            </span>
+        </li>
+    );
 }
 
-const testInventoryItems = [ {
-
-        id: 0,
-        name: "Item 1",
-        price: 91.99,
-        quantity: 5,
-    },
-    {
-        id: 1,
-        name: "Item 2",
-        price: 15.99,
-        quantity: 6,
-    },
-    {
-        id: 2,
-        name: "Item 3",
-        price: 61.99,
-        quantity: 2,
-    },
-    {
-        id: 3,
-        name: "Item 4",
-        price: 3.99,
-        quantity: 5,
-    },
-    {
-        id: 4,
-        name: "Item 5",
-        price: 56.99,
-        quantity: 1,
-    }
-];
-
-    const InventoryPanel = () => {
-
-        const items = testInventoryItems?.map((item) => {
-            let i = new InventoryItem(item.id, item.name, item.price, item.quantity);
-            return (
-                <div
-                    key={i.id}
-                    item={i}
-                />
-            );
-        });
+export const InventoryPanel = ({ inventoryItems }) => {
+    const items = inventoryItems?.map((item) => {
+        let i = new Warehouse(item.warehouse_id, item.total_space, item.remaining_space, item.inventory);
+        return (
+            <InventoryList
+                key={i.warehouse_id}
+                item={i}
+            />
+        );
+    });
 
     return (
-        <>
-        {testInventoryItems.map((item) => 
-        (
-            <h3>{item.name}  ${item.price}  amount: {item.quantity}</h3>
-            
-        ))}
-        </>
+        <div>
+            <ul>{items}</ul>
+        </div>
     );
-};
+}
 
 export default InventoryPanel;
