@@ -12,5 +12,12 @@ export const TEST_ITEMS = [
         remaining_space: 100,
         inventory: [],
         changes: []
+    },
+    {
+        warehouse_id: 789,
+        total_space: 300,
+        remaining_space: 150,
+        inventory: [],
+        changes: []
     }
 ];
