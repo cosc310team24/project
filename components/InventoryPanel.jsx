@@ -44,8 +44,8 @@ export const InventoryList = ({ item }) => {
                 <br />
                 Inventory: {it.inventory}
                 <br />
-                <button>Inventory History</button>
-                Changes: {it.changes}
+                <button>Show/Hide History</button>
+                {it.changes}
             </span>
         </li>
     );

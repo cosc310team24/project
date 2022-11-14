@@ -1,12 +1,15 @@
 .inventoryPanel {
     
 }
-.inventoryList{
+.inventory_list{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    overflow: auto;
+    width: 50%;
+    height: auto;
+    text-align: left;
+    margin: 10px;
+    border-radius:4px;
+    background: #f0f0f0;
+    float: inline;
+    padding: 1rem;
 }
