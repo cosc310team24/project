@@ -93,18 +93,17 @@ export const ShipmentList = ({ item }) => {
         setPriorityString("Rush");
     };
 
-    // get status 
+    // get status
     const getStatus = () => {
         return status;
     };
-     
+
     // get priority
     const getPriority = () => {
         return priority;
     };
-    
-    
-    // initial status and priority not appearing in the shipment list 
+
+    // initial status and priority not appearing in the shipment list
     useEffect(() => {
         setStatus(item.status);
         setPriority(item.priority);
@@ -140,7 +139,7 @@ export const ShipmentList = ({ item }) => {
                 </span>
                 <div className={styles.content}>
                     {content.map((item) => (
-                        <div key={item.item_id}>
+                        <div key={"" + item.item_id + shipment_id}>
                             {item.name} x {item.quantity}
                         </div>
                     ))}
@@ -235,7 +234,7 @@ const ShipmentPanel = ({ testShipments }) => {
             <div className={styles.shipmentList}>
                 <ul>
                     {filteredShipments.map((item) => (
-                        <ShipmentList item={item} />
+                        <ShipmentList item={item} key={item.shipment_id} />
                     ))}
                 </ul>
             </div>

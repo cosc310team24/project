@@ -45,7 +45,7 @@ export const TextBox = ({
             onChange={(e) => {
                 handleChange(e);
             }}
-            placeHolder={props.placeHolder}
+            placeholder={props.placeholder}
             {...props}
         />
     );
