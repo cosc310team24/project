@@ -9,7 +9,6 @@ export class Warehouse {
         this.warehouse_id = warehouse_id;
         this.total_space = total_space;
         this.remaining_space = remaining_space;
-        // inventory is an array of objects with the following properties: item_id, item_name, item_quantity 
         this.inventory = inventory;
         this.changes = changes;
     }
@@ -71,7 +70,7 @@ export class Warehouse {
     }
 
 
-}    
+}
 
 export function InventoryPanel({ inventoryItems }) {
     const [selectedWarehouse, setSelectedWarehouse] = useState(inventoryItems[0]);
@@ -118,12 +117,6 @@ export function InventoryPanel({ inventoryItems }) {
         setWarehouseInventory(selectedWarehouse.inventory);
     }, [selectedWarehouse]);
 
-    // add item to warehouse 
-    // TODO: add error handling for when the item already exists in the warehouse 
-    // TODO: add error handling for when the warehouse is full 
-    // TODO: add error handling for when the quantity is invalid 
-    // TODO: add error handling for when the warehouse is invalid 
-
     const addItem = (e) => {
         e.preventDefault();
         let item_id = item;
@@ -159,7 +152,7 @@ export function InventoryPanel({ inventoryItems }) {
         if (item_exists) {
             warehouse_inventory_object.forEach(item => {
                 if (item.item_id === item_id) {
-                    item.item_quantity += item_quantity;
+                    item.item_quantity = item.item_quantity - -item_quantity;
                 }
             });
             warehouse_object.changes.push({ item_id, item_name, item_quantity });
@@ -181,23 +174,75 @@ export function InventoryPanel({ inventoryItems }) {
     }
 
     // remove item from warehouse
-    const removeItem = () => {
-        if (quantity > 0) {
-            const itemIndex = warehouseInventoryRef.current.findIndex((item) => item.name === item);
-            if (itemIndex > -1) {
-                if (warehouseInventoryRef.current[itemIndex].quantity > quantity) {
-                    warehouseInventoryRef.current[itemIndex].quantity -= quantity;
-                } else {
-                    warehouseInventoryRef.current.splice(itemIndex, 1);
-                }
-                warehouseSpaceRemainingRef.current += quantity;
-                setWarehouseSpaceRemaining(warehouseSpaceRemainingRef.current);
-                setItemList(warehouseInventoryRef.current);
-            }
+    const removeItem = (e) => {
+        e.preventDefault();
+        let item_id = item;
+        let item_name = item;
+        let item_quantity = quantity;
+        let warehouse_id = warehouse;
+        let warehouse_space = warehouseSpace;
+        let warehouse_space_remaining = warehouseSpaceRemaining;
+        let warehouse_inventory = warehouseInventory;
+        let warehouse_list = warehouseList;
+        let warehouse_object = warehouse_list[warehouse_id];
+        let warehouse_inventory_object = warehouse_object.inventory;
+
+        // check if the warehouse is valid
+        if (warehouse_id < 0 || warehouse_id >= warehouse_list.length) {
+            alert("Invalid warehouse");
+            return;
         }
+
+        // check if the item exists in the warehouse
+        let item_exists = warehouse_inventory_object.find(item => item.item_id === item_id);
+        if (!item_exists) {
+            alert("Item does not exist in warehouse");
+            return;
+        }
+
+        // check if the quantity is valid
+        if (item_quantity <= 0) {
+            alert("Invalid quantity");
+            return;
+        }
+
+        // remove the item from the warehouse
+        warehouse_inventory_object.forEach(item => {
+            if (item.item_id === item_id) {
+                if (item.item_quantity - 0 < item_quantity) {
+                    alert("Invalid quantity");
+                    return;
+                }
+                item.item_quantity -= item_quantity;
+                if (item.item_quantity === 0) {
+                    warehouse_inventory_object.splice(warehouse_inventory_object.indexOf(item), 1);
+                }
+            }
+        });
+        warehouse_object.changes.push({ item_id, item_name, item_quantity: item_quantity });
+        setWarehouseSpaceRemaining(warehouse_space_remaining - -item_quantity);
+        setWarehouseInventory(warehouse_inventory_object);
     }
 
-    // warehouse dropdown menu
+    // change active warehouse using warehouse_Id with dropdown menu 
+    const changeWarehouse = (e) => {
+        e.preventDefault();
+        let warehouse_id = e.target.value;
+        let warehouse_list = warehouseList;
+        let warehouse_object = warehouse_list[warehouse_id];
+        let warehouse_space = warehouse_object.total_space;
+        let warehouse_space_remaining = warehouse_object.remaining_space;
+        let warehouse_inventory = warehouse_object.inventory;
+        warehouseRef.current = warehouse_id;
+        warehouseSpaceRef.current = warehouse_space;
+        warehouseSpaceRemainingRef.current = warehouse_space_remaining;
+        warehouseInventoryRef.current = warehouse_inventory;
+        setWarehouse(warehouse_id);
+        setWarehouseSpace(warehouse_space);
+        setWarehouseSpaceRemaining(warehouse_space_remaining);
+        setWarehouseInventory(warehouse_inventory);
+    }
+
     const warehouseMenu = (
         <select className={styles.warehouseDropdown} onChange={(e) => {
             warehouseRef.current = e.target.value;
@@ -226,7 +271,7 @@ export function InventoryPanel({ inventoryItems }) {
                     ))}
                 </ul>
             </div>
-            
+
             {/* add/remove */}
             <div className={styles.inventory_panel__add_remove}>
                 <h1>Add/Remove Item</h1>
@@ -256,6 +301,16 @@ export function InventoryPanel({ inventoryItems }) {
                     <input type="button" value="Add" onClick={addItem} />
                     <input type="button" value="Remove" onClick={removeItem} />
                 </form>
+            </div>
+            <div className={styles.inventory_panel__history}>
+                <h1>History</h1>
+                <ul>
+                    {warehouseList[warehouse].changes.reverse().map((change, index) => (
+                        <li key={index}>
+                            <p>Item ID: {change.item_id} Quantity: {change.item_quantity}</p>
+                        </li>
+                    ))}
+                </ul>
             </div>
         </div>
     );

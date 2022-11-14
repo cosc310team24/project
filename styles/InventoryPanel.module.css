@@ -56,3 +56,9 @@
     cursor: pointer;
     transition: all 0.3s ease;
 }
+.inventory_panel__history{
+    margin: 10px;
+    border-radius:4px;
+    background: #f0f0f0;
+    padding: 1rem;
+}
