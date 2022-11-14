@@ -5,37 +5,41 @@
     margin-bottom: 5px;
 }
 .sortButtons button {
-    background-color: #0069ed; 
-    border: 1px solid #0069ed; 
+    background-color: #0069ed;
+    border: 1px solid #0069ed;
     color: white; /* White text */
     padding: 10px 24px; /* Some padding */
     cursor: pointer; /* Pointer/hand icon */
     float: left; /* Float the buttons side by side */
-    border-radius:4px;
+    border-radius: 4px;
     margin: 5px;
-  }
+}
 .sortButtons:after {
     content: "";
     clear: both;
     display: table;
-  }
+}
 .sortButtons button:active {
     background-color: #0e51b6;
-  }
-.sortButtons button:hover{
+}
+.sortButtons button:hover {
     background-color: #0e51b6;
 }
+.sortDirection {
+    display: flex;
+    flex-direction: row;
+}
 .sortDirection button {
-    background-color: #656565; 
-    border: 1px solid #656565; 
+    /* background-color: #656565; */
+    /* border: 1px solid #656565; */
     color: white; /* White text */
     padding: 10px 24px; /* Some padding */
-    cursor: pointer; /* Pointer/hand icon */
-    float: left; /* Float the buttons side by side */
-    border-radius:4px;
+    /* cursor: pointer; Pointer/hand icon */
+    /* float: left; Float the buttons side by side */
+    border-radius: 4px;
     margin: 5px;
 }
-.sortDirection button:hover{
+.sortDirection button:hover {
     background-color: #1a1a1a;
 }
 
@@ -51,7 +55,7 @@
 .shipment {
     overflow: hidden;
     max-width: 90%;
-    transition: box-shadow .3s;
+    transition: box-shadow 0.3s;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -59,22 +63,22 @@
     text-align: left;
     margin: 10px;
     padding: 10px;
-    border-radius:4px;
+    border-radius: 4px;
     background: #f0f0f0;
     float: inline;
     padding: 1rem;
 }
-.shipment button{
-    background-color: #0069ed; 
-    border: 1px solid #0069ed; 
+.shipment button {
+    background-color: #0069ed;
+    border: 1px solid #0069ed;
     color: white; /* White text */
     padding: 5px 12px; /* Some padding */
     cursor: pointer; /* Pointer/hand icon */
     float: left; /* Float the buttons side by side */
-    border-radius:4px;
+    border-radius: 4px;
     margin: 5px;
 }
-.shipment button:hover{
+.shipment button:hover {
     background-color: #0e51b6;
 }
 

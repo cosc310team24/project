@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import styles from "/styles/ShipmentPanel.module.css";
 import SearchBar from "./SearchBar";
 import Generator from "/utils/generators.js";
+import { Button } from "/components/Button";
 
 //Shipment class
 export class Shipment {
@@ -69,10 +70,10 @@ export class Shipment {
     }
 }
 
-// shipments is an array of Shipment objects 
+// shipments is an array of Shipment objects
 //content is an array of objects with the following properties: item_id, name, quantity, price
 //shipmentList displays the shipment_id, price, (int) status, (int )priority, date, and content of each shipment
-//each shipment has two buttons to change the status and priority of the shipment respectively 
+//each shipment has two Buttons to change the status and priority of the shipment respectively
 //status is an int that can be 0, 1, 2, or 3, use get statusString to get the string representation of the status
 //priority is an int that can be 0 or 1, use get priorityString to get the string representation of the priority
 
@@ -87,19 +88,19 @@ export const ShipmentList = ({ item }) => {
     const [date, setDate] = useState(item.date);
     const [shipment_id, setShipment_id] = useState(item.shipment_id);
 
-    //update status to cancelled 
+    //update status to cancelled
     const handleCancel = () => {
         setStatus(3);
         setStatusString("Cancelled");
     };
 
-    //update priority to rush 
+    //update priority to rush
     const handleRush = () => {
         setPriority(1);
         setPriorityString("Rush");
     };
 
-    // initial status and priority not appearing in the shipment list 
+    // initial status and priority not appearing in the shipment list
     useEffect(() => {
         setStatus(item.status);
         setPriority(item.priority);
@@ -111,7 +112,6 @@ export const ShipmentList = ({ item }) => {
         setDate(item.date);
         setShipment_id(item.shipment_id);
     }, [item]);
-
 
     return (
         <li>
@@ -141,12 +141,10 @@ export const ShipmentList = ({ item }) => {
                         </div>
                     ))}
                 </div>
-                <div className={styles.buttons}>
-
-                    <button onClick={handleCancel}>Cancel</button>
-                    <button onClick={handleRush}>Rush</button>
+                <div className={styles.Buttons}>
+                    <Button onClick={handleCancel}>Cancel</Button>
+                    <Button onClick={handleRush}>Rush</Button>
                 </div>
-
             </div>
         </li>
     );
@@ -158,7 +156,7 @@ export const ShipmentList = ({ item }) => {
 // <span>
 //     <b>Shipment ID:</b> {it.shipment_id}
 // </span>
-//             <span> 
+//             <span>
 //                 <b>Date: </b> { it.date }
 //             </span>
 //             <span>
@@ -172,8 +170,8 @@ export const ShipmentList = ({ item }) => {
 //             </span>
 //             <span>
 //                 <b> <br></br> Content: </b>
-//             </span> 
-//             <span> 
+//             </span>
+//             <span>
 //                 {/* // create new div for each item in content
 //                 // check if content is undefined */}
 //                 {item.content === undefined ? (
@@ -201,8 +199,8 @@ export const ShipmentList = ({ item }) => {
 //                 )}
 //             </span>
 //             <span>
-//                 <button onClick={() => it.setPriority(1)}>Rush</button>
-//                 <button onClick={() => it.setStatus(3)}>Cancel</button>
+//                 <Button onClick={() => it.setPriority(1)}>Rush</Button>
+//                 <Button onClick={() => it.setStatus(3)}>Cancel</Button>
 //             </span>
 //         </li>
 //     );
@@ -250,18 +248,41 @@ const ShipmentPanel = ({ testShipments }) => {
     return (
         <div className={styles.container}>
             <div className={styles.searchBar}>
-                <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+                <SearchBar
+                    searchQuery={searchQuery}
+                    setSearchQuery={setSearchQuery}
+                />
             </div>
             <div className={styles.sortButtons}>
-                <button onClick={() => setSortType("shipment_id")}>Sort by ID</button>
-                <button onClick={() => setSortType("date")}>Sort by Date</button>
-                <button onClick={() => setSortType("status")}>Sort by Status</button>
-                <button onClick={() => setSortType("price")}>Sort by Price</button>
-                <button onClick={() => setSortType("priority")}>Sort by Priority</button>
+                <Button onClick={() => setSortType("shipment_id")}>
+                    Sort by ID
+                </Button>
+                <Button onClick={() => setSortType("date")}>
+                    Sort by Date
+                </Button>
+                <Button onClick={() => setSortType("status")}>
+                    Sort by Status
+                </Button>
+                <Button onClick={() => setSortType("price")}>
+                    Sort by Price
+                </Button>
+                <Button onClick={() => setSortType("priority")}>
+                    Sort by Priority
+                </Button>
             </div>
             <div className={styles.sortDirection}>
-                <button onClick={() => setSortDirection("ascending")}>Ascending</button>
-                <button onClick={() => setSortDirection("descending")}>Descending</button>
+                <Button
+                    onClick={() => setSortDirection("ascending")}
+                    color={"#656565"}
+                >
+                    Ascending
+                </Button>
+                <Button
+                    onClick={() => setSortDirection("descending")}
+                    color={"#656565"}
+                >
+                    Descending
+                </Button>
             </div>
             <div className={styles.shipmentList}>
                 <ul>

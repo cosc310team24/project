@@ -1,10 +1,10 @@
+import TextBox from "/components/TextBox";
+
 const SearchBar = ({ searchQuery, setSearchQuery }) => (
-    <input 
-        type="text"
+    <TextBox
         placeholder="Search by shipment ID"
         value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
+        onChange={(v) => setSearchQuery(v)}
     />
-
 );
 export default SearchBar;
