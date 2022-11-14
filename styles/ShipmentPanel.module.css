@@ -1,26 +1,81 @@
-.orderList {
+.searchBar {
+    align-items: left;
     display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin: 1rem;
-    padding: 1rem;
-    overflow: hidden;
-    margin-bottom: 2rem;
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+.sortButtons button {
+    background-color: #0069ed; 
+    border: 1px solid #0069ed; 
+    color: white; /* White text */
+    padding: 10px 24px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    float: left; /* Float the buttons side by side */
+    border-radius:4px;
+    margin: 5px;
+  }
+.sortButtons:after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+.sortButtons button:active {
+    background-color: #0e51b6;
+  }
+.sortButtons button:hover{
+    background-color: #0e51b6;
+}
+.sortDirection button {
+    background-color: #656565; 
+    border: 1px solid #656565; 
+    color: white; /* White text */
+    padding: 10px 24px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    float: left; /* Float the buttons side by side */
+    border-radius:4px;
+    margin: 5px;
+}
+.sortDirection button:hover{
+    background-color: #1a1a1a;
 }
 
-.shipment {
-    transition: box-shadow 0.3s;
+.container {
+    max-width: 100%;
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 100%;
+    height: 100%;
+    margin: 2rem;
+    margin: 2rem;
+}
+.shipment {
+    overflow: hidden;
+    max-width: 90%;
+    transition: box-shadow .3s;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
     height: auto;
     text-align: left;
     margin: 10px;
-    border-radius: 4px;
+    padding: 10px;
+    border-radius:4px;
     background: #f0f0f0;
     float: inline;
     padding: 1rem;
+}
+.shipment button{
+    background-color: #0069ed; 
+    border: 1px solid #0069ed; 
+    color: white; /* White text */
+    padding: 5px 12px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    float: left; /* Float the buttons side by side */
+    border-radius:4px;
+    margin: 5px;
+}
+.shipment button:hover{
+    background-color: #0e51b6;
 }
 
 .shipment:hover {
