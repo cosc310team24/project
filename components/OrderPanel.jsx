@@ -78,7 +78,7 @@ export const OrderListItem = ({ item, onChange, update = false }) => {
         // console.log(`OrderListItem ${id}: ${count}`);
         setCount(qty);
         setPrice(it.price * qty);
-        console.log(item);
+        // console.log(item);
         // onChange(item, qty);
     };
 
@@ -126,7 +126,7 @@ export const OrderPanel = ({ orderCallback, testOrderItems }) => {
         // Remove item if quantity is 0
         if (quantity === 0) {
             delete newCartItems[item.id];
-            console.log(`Successfully removed item with id: ${item.id}`);
+            // console.log(`Successfully removed item with id: ${item.id}`);
         }
 
         // Set to new updated value

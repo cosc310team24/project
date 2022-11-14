@@ -91,7 +91,12 @@ export const ButtonCart = ({ amt, onClick = () => {}, ...props }) => {
     }, [props.data]);
 
     return (
-        <Link href={{ pathname: cartLink, query: cartData }}>
+        <Link
+            href={{
+                pathname: cartLink,
+                query: { data: JSON.stringify(cartData) },
+            }}
+        >
             <ButtonGo
                 name="buttonCart"
                 onClick={onClick}

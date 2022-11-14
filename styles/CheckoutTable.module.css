@@ -1,6 +1,7 @@
 .checkoutTable {
     border-spacing: 0;
-    max-width: 50%;
+    width: 100%;
+    margin-bottom: 1em;
 }
 
 .checkoutTable th,
@@ -8,6 +9,7 @@
     border: 0.5px solid lightgrey;
     padding: 0.5em 0.5em;
 }
+
 .headerRow th {
     background: #eee;
 }
@@ -26,4 +28,20 @@
 .input {
     padding: 0.5em;
     border: 1px solid grey;
+}
+
+.itemName {
+    text-align: left;
+    width: 70%;
+}
+
+.itemPrice {
+    width: 20%;
+    text-align: right;
+}
+
+.itemQty {
+    display: flex;
+    flex-direction: column;
+    min-width: 20%;
 }

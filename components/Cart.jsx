@@ -135,7 +135,7 @@ export const CartBanner = ({
                         amt={cartSize}
                         m="0"
                         link="/checkout"
-                        data={cart}
+                        data={localCart}
                     />
                 </li>
                 {itemStrings}

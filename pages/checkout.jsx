@@ -14,7 +14,17 @@ import { TEST_ITEMS } from "/utils/test_order_items.js";
 
 export const Checkout = () => {
     const router = useRouter();
-    const [cartData, setCartData] = useState(router.query);
+    console.log("query data: ", router.query.data);
+    console.log(`URL data is ${router.query.data}`);
+    const [cartData, setCartData] = useState({});
+
+    useEffect(() => {
+        setCartData(JSON.parse(router.query.data || "{}"));
+    }, [router.query.data]);
+
+    useEffect(() => {
+        // console.log(cartData, JSON.parse(JSON.stringify(cartData, null, 4)));
+    }, [cartData]);
 
     return (
         <Content title="Checkout">
