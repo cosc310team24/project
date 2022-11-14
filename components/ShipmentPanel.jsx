@@ -70,13 +70,6 @@ export class Shipment {
     }
 }
 
-// shipments is an array of Shipment objects
-//content is an array of objects with the following properties: item_id, name, quantity, price
-//shipmentList displays the shipment_id, price, (int) status, (int )priority, date, and content of each shipment
-//each shipment has two Buttons to change the status and priority of the shipment respectively
-//status is an int that can be 0, 1, 2, or 3, use get statusString to get the string representation of the status
-//priority is an int that can be 0 or 1, use get priorityString to get the string representation of the priority
-
 export const ShipmentList = ({ item }) => {
     const [status, setStatus] = useState(item.status);
     const [priority, setPriority] = useState(item.priority);
@@ -100,7 +93,18 @@ export const ShipmentList = ({ item }) => {
         setPriorityString("Rush");
     };
 
-    // initial status and priority not appearing in the shipment list
+    // get status 
+    const getStatus = () => {
+        return status;
+    };
+     
+    // get priority
+    const getPriority = () => {
+        return priority;
+    };
+    
+    
+    // initial status and priority not appearing in the shipment list 
     useEffect(() => {
         setStatus(item.status);
         setPriority(item.priority);
@@ -123,10 +127,10 @@ export const ShipmentList = ({ item }) => {
                     <b>Price:</b> ${price}
                 </span>
                 <span>
-                    <b>Status:</b> {statusString}
+                    <b>Status:</b> {getStatus()}
                 </span>
                 <span>
-                    <b>Priority:</b> {priorityString}
+                    <b>Priority:</b> {getPriority()}
                 </span>
                 <span>
                     <b>Date:</b> {date}
@@ -149,62 +153,6 @@ export const ShipmentList = ({ item }) => {
         </li>
     );
 };
-
-//     const it = new Shipment(item.shipment_id, item.price, item.status, item.priority, item.date, item.content);
-//     return (
-//         <li className={styles.shipment}>
-// <span>
-//     <b>Shipment ID:</b> {it.shipment_id}
-// </span>
-//             <span>
-//                 <b>Date: </b> { it.date }
-//             </span>
-//             <span>
-//                 <b>Total Price:</b> {it.priceString}
-//             </span>
-//             <span>
-//                 <b>Status:</b> {it.statusString}
-//             </span>
-//             <span style={{ color: it.priority === 1 ? "orange" : "black" }}>
-//                 <b>Priority:</b> {it.priorityString}
-//             </span>
-//             <span>
-//                 <b> <br></br> Content: </b>
-//             </span>
-//             <span>
-//                 {/* // create new div for each item in content
-//                 // check if content is undefined */}
-//                 {item.content === undefined ? (
-//                     <div>
-//                         <b>Content:</b> No content
-//                     </div>
-//                 ) : (
-//                     // check if content is empty
-//                     item.content.length === 0 ? (
-//                         <div>
-//                             <b>Content:</b> No content
-//                         </div>
-//                     ) : (
-//                         // content is not empty
-//                         // create string to return item_id, name, quantity, and price
-//                         item.content.map((item) => (
-//                             <div>
-//                                 <b>Item ID:</b> {item.item_id}
-//                                 <b>Name:</b> {item.name}
-//                                 <b>Quantity:</b> {item.quantity}
-//                                 <b>Price:</b> {Shipment.priceFormatter.format(item.price)}
-//                             </div>
-//                         ))
-//                     )
-//                 )}
-//             </span>
-//             <span>
-//                 <Button onClick={() => it.setPriority(1)}>Rush</Button>
-//                 <Button onClick={() => it.setStatus(3)}>Cancel</Button>
-//             </span>
-//         </li>
-//     );
-// };
 
 const ShipmentPanel = ({ testShipments }) => {
     const [filteredShipments, setFilteredShipments] = useState([]);
