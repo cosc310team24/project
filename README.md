@@ -122,7 +122,7 @@ If your component fails the tests, Cypress will inform you where and how the fai
 
 #### Profile Displays
 
-Allows users to see the profiles of staff members including their id, first name, last name, email, and permission level. 
+Allows users to see the profiles of staff members including their id, first name, last name, email, and permission level. The example image shows the profile page with some test profiles. 
 ![image](https://user-images.githubusercontent.com/113552143/201818540-2286f133-5cdc-45ff-b4af-f9e96b5bca2c.png)
 
 #### Pass Cart to Checkout, then to Shipments
@@ -133,9 +133,10 @@ Allows for items in the cart/order page to be passed to checkout, which can then
 
 #### Filter and Search Shipments + GUI to Modify Active Shipments
 
-Allows users to search the shipments page by shipment ID, date, status, price, and priority. Also allows for the cancellation of active shipments or the option of rushing them if they are needed sooner. The example image shows the shipments list sorted by date, where it was sorted by ID in the previous image. 
-![image](https://user-images.githubusercontent.com/113552143/201819058-cf6e7402-827e-43ed-99dc-8f6b65fba358.png)
+Allows users to search the shipments page by shipment ID, date, status, price, and priority. Also allows for the cancellation of active shipments or the option of rushing them if they are needed sooner. The example image shows the shipments list sorted by status, where it was sorted by ID in the previous image. 
+![image](https://user-images.githubusercontent.com/113552143/201820384-a5988e4d-a00d-4535-a4a4-366fd511c2b2.png)
 
 #### Warehouse GUI for Modifying and Reviewing Inventory
 
-Allows for the viewing of warehouse inventory, adding/removing of items, and viewing of change history. 
+Allows for the viewing of warehouse inventory, adding/removing of items, and viewing of change history. The example image shows warehouse 123 after an item with ID 123 was added. 
+![image](https://user-images.githubusercontent.com/113552143/201820182-68c32d32-b3ef-4909-9473-6f341ea59751.png)
