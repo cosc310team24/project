@@ -122,16 +122,16 @@ If your component fails the tests, Cypress will inform you where and how the fai
 
 #### Profile Displays
 
-Allows users to see user profiles in the system. 
+Allows users to see the profiles of staff members including their id, first name, last name, email, and permission level. 
 
-#### Passing Cart to Orders
+#### Pass Cart to Checkout, then to Shipments
 
-Allows the system to read the items currently in the cart and pass them over to be ordered. 
+Allows for items in the cart/order page to be passed to checkout, which can then be passed to the shipments page. 
 
-#### Passing Orders to Shipments
+#### Filter and Search Shipments + GUI to Modify Active Shipments
 
-Allows the system to move items that are registered as ordered to be shipped. 
+Allows users to search the shipments page by shipment ID, date, status, price, and priority. Also allows for the cancellation of active shipments or the option of rushing them if they are needed sooner. 
 
-#### Search Active Orders
+#### Warehouse GUI for Modifying and Reviewing Inventory
 
-Allows for searching through active orders to view a specific order. 
+Allows for the viewing of warehouse inventory, adding/removing of items, and viewing of change history. 
