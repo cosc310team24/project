@@ -123,14 +123,18 @@ If your component fails the tests, Cypress will inform you where and how the fai
 #### Profile Displays
 
 Allows users to see the profiles of staff members including their id, first name, last name, email, and permission level. 
+![image](https://user-images.githubusercontent.com/113552143/201818540-2286f133-5cdc-45ff-b4af-f9e96b5bca2c.png)
 
 #### Pass Cart to Checkout, then to Shipments
 
-Allows for items in the cart/order page to be passed to checkout, which can then be passed to the shipments page. 
+Allows for items in the cart/order page to be passed to checkout, which can then be passed to the shipments page. The example images show how items from the order page can be added to shipments
+![image](https://user-images.githubusercontent.com/113552143/201818929-81775b20-395c-4ea7-ac68-0797b9d87e49.png)
+![image](https://user-images.githubusercontent.com/113552143/201818981-f3b0ed64-f046-4508-bb3a-064c49d94b54.png)
 
 #### Filter and Search Shipments + GUI to Modify Active Shipments
 
-Allows users to search the shipments page by shipment ID, date, status, price, and priority. Also allows for the cancellation of active shipments or the option of rushing them if they are needed sooner. 
+Allows users to search the shipments page by shipment ID, date, status, price, and priority. Also allows for the cancellation of active shipments or the option of rushing them if they are needed sooner. The example image shows the shipments list sorted by date, where it was sorted by ID in the previous image. 
+![image](https://user-images.githubusercontent.com/113552143/201819058-cf6e7402-827e-43ed-99dc-8f6b65fba358.png)
 
 #### Warehouse GUI for Modifying and Reviewing Inventory
 
