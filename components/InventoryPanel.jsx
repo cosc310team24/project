@@ -261,6 +261,7 @@ export function InventoryPanel({ inventoryItems }) {
         warehouseSpaceRemainingRef.current = warehouse_space_remaining;
         warehouseInventoryRef.current = warehouse_inventory;
         setWarehouse(warehouse_id);
+        setItemList(warehouse_inventory);
         setWarehouseSpace(warehouse_space);
         setWarehouseSpaceRemaining(warehouse_space_remaining);
         setWarehouseInventory(warehouse_inventory);
@@ -272,6 +273,7 @@ export function InventoryPanel({ inventoryItems }) {
             onChange={(e) => {
                 warehouseRef.current = e.target.value;
                 setWarehouse(warehouseRef.current);
+                changeWarehouse(e);
             }}
         >
             {warehouseList.map((warehouse, index) => (
