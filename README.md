@@ -32,7 +32,7 @@ From a terminal in the folder you cloned, run `$ yarn dev`. This will start the 
 
 This class defines a warehouse used for storage item and tracks the total storage space, remaining storage space, warehouse ID, and a changelog of the warehouse's items. It allows the addition and removal of items while keeping track of which staff member removed what items and notifies users if they attempt to remove an item above their permission level.
 
-#### cart
+#### Cart
 
 This class keeps a list of items along with their quantities in the system's cart and allows the addition or removal of one or multiple items at a time.
 
