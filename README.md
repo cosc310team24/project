@@ -125,15 +125,16 @@ If your component fails the tests, Cypress will inform you where and how the fai
 Allows users to see the profiles of staff members including their id, first name, last name, email, and permission level. The example image shows the profile page with some test profiles. 
 ![image](https://user-images.githubusercontent.com/113552143/201818540-2286f133-5cdc-45ff-b4af-f9e96b5bca2c.png)
 
-#### Pass Cart to Checkout, then to Shipments
+#### Pass Cart to Checkout
 
-Allows for items in the cart/order page to be passed to checkout, which can then be passed to the shipments page. The example images show how items from the order page can be added to shipments
+Allows for items in the cart/order page to be passed to checkout. The example images show how items from the order page can be moved to checkout.
 ![image](https://user-images.githubusercontent.com/113552143/201818929-81775b20-395c-4ea7-ac68-0797b9d87e49.png)
-![image](https://user-images.githubusercontent.com/113552143/201818981-f3b0ed64-f046-4508-bb3a-064c49d94b54.png)
+![image](https://user-images.githubusercontent.com/113552143/201826641-143ff46e-6c9a-4571-8d00-87d19b444231.png)
 
 #### Filter and Search Shipments + GUI to Modify Active Shipments
 
-Allows users to search the shipments page by shipment ID, date, status, price, and priority. Also allows for the cancellation of active shipments or the option of rushing them if they are needed sooner. The example image shows the shipments list sorted by status, where it was sorted by ID in the previous image. 
+Allows users to search the shipments page by shipment ID, date, status, price, and priority. Also allows for the cancellation of active shipments or the option of rushing them if they are needed sooner by changing their priority. The example image shows the shipments list sorted by ID in the first image and by status in the second.
+![image](https://user-images.githubusercontent.com/113552143/201818981-f3b0ed64-f046-4508-bb3a-064c49d94b54.png)
 ![image](https://user-images.githubusercontent.com/113552143/201820384-a5988e4d-a00d-4535-a4a4-366fd511c2b2.png)
 
 #### Warehouse GUI for Modifying and Reviewing Inventory
