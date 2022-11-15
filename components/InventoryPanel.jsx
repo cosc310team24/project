@@ -30,7 +30,8 @@ export class Warehouse {
     // add an item to the inventory
     addItem(item_id, item_name, item_quantity) {
         this.inventory.push({ item_id, item_name, item_quantity });
-        this.changes.push({ item_id, item_name, item_quantity });
+        let status = "+" + item_quantity;
+        this.changes.push({status, item_id, item_name, item_quantity });
     }
 
     // remove an item from the inventory
@@ -38,7 +39,8 @@ export class Warehouse {
         this.inventory = this.inventory.filter(
             (item) => item.item_id !== item_id
         );
-        this.changes.push({ item_id, item_name, item_quantity });
+        let status = "-" + item_quantity;
+        this.changes.push({ status, item_id, item_name, item_quantity });
     }
 
     // update the quantity of an item in the inventory
@@ -48,7 +50,12 @@ export class Warehouse {
                 item.item_quantity = item_quantity;
             }
         });
-        this.changes.push({ item_id, item_name, item_quantity });
+        if (item.item_quantity < item_quantity){
+            let status = "+" + item_quantity;
+        } else{
+            let status = "-" + item_quantity;
+        }
+        this.changes.push({ status, item_id, item_name, item_quantity });
     }
 
     // get the quantity of an item in the inventory
@@ -130,6 +137,7 @@ export function InventoryPanel({ inventoryItems }) {
         let item_id = item;
         let item_name = item;
         let item_quantity = quantity;
+        let total_quantity = quantity;
         let warehouse_id = warehouse;
         let warehouse_space = warehouseSpace;
         let warehouse_space_remaining = warehouseSpaceRemaining;
@@ -137,6 +145,7 @@ export function InventoryPanel({ inventoryItems }) {
         let warehouse_list = warehouseList;
         let warehouse_object = warehouse_list[warehouse_id];
         let warehouse_inventory_object = warehouse_object.inventory;
+        let status = "+" + item_quantity;
 
         // check if the warehouse is full
         if (warehouse_space_remaining < item_quantity) {
@@ -163,14 +172,17 @@ export function InventoryPanel({ inventoryItems }) {
             warehouse_inventory_object.forEach((item) => {
                 if (item.item_id === item_id) {
                     item.item_quantity = item.item_quantity - -item_quantity;
+                    total_quantity = item.item_quantity;
                 }
             });
+            warehouse_object.remaining_space -= item_quantity;
             warehouse_object.changes.push({
+                status,
                 item_id,
                 item_name,
                 item_quantity,
+                total_quantity,
             });
-            warehouse_object.remaining_space -= item_quantity;
             setWarehouseSpaceRemaining(warehouse_object.remaining_space);
             setWarehouseInventory(warehouse_inventory_object);
             return;
@@ -193,6 +205,7 @@ export function InventoryPanel({ inventoryItems }) {
         let item_id = item;
         let item_name = item;
         let item_quantity = quantity;
+        let total_quantity = quantity;
         let warehouse_id = warehouse;
         let warehouse_space = warehouseSpace;
         let warehouse_space_remaining = warehouseSpaceRemaining;
@@ -200,6 +213,7 @@ export function InventoryPanel({ inventoryItems }) {
         let warehouse_list = warehouseList;
         let warehouse_object = warehouse_list[warehouse_id];
         let warehouse_inventory_object = warehouse_object.inventory;
+        let status = "-" + item_quantity;
 
         // check if the warehouse is valid
         if (warehouse_id < 0 || warehouse_id >= warehouse_list.length) {
@@ -230,18 +244,20 @@ export function InventoryPanel({ inventoryItems }) {
                     return;
                 }
                 item.item_quantity -= item_quantity;
+                total_quantity = item.item_quantity;
                 if (item.item_quantity === 0) {
                     warehouse_inventory_object.splice(
                         warehouse_inventory_object.indexOf(item),
-                        1
                     );
                 }
             }
         });
         warehouse_object.changes.push({
+            status,
             item_id,
             item_name,
             item_quantity: item_quantity,
+            total_quantity,
         });
         setWarehouseSpaceRemaining(warehouse_space_remaining - -item_quantity);
         setWarehouseInventory(warehouse_inventory_object);
@@ -343,8 +359,8 @@ export function InventoryPanel({ inventoryItems }) {
                         .map((change, index) => (
                             <li key={index}>
                                 <p>
-                                    Item ID: {change.item_id} Quantity:{" "}
-                                    {change.item_quantity}
+                                    {change.status} Item ID: {change.item_id} Quantity:{" "}
+                                    {change.total_quantity}
                                 </p>
                             </li>
                         ))}
